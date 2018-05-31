@@ -1,0 +1,11 @@
+[
+    [
+      {"area": "Salary ", "value": 80},
+      {"area": "Bonus", "value": 40},
+      {"area": "Skill Dev ", "value": 40},
+      {"area": "Exclusivity ", "value": 90},
+      {"area": "Job Security", "value": 60},
+      {"area": "Job Security", "value": 60},
+      {"area": "Vacation", "value": 80}
+  	]
+  ]
