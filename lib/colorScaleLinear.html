@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<style>
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  #main {
+    width: 960px;
+  }
+
+.axis path {
+	display: none;
+}
+  .axis line {
+	display: none;
+}
+
+</style>
+<div id="main">
+  <svg width="800" height="440"></svg>
+</div>
+<script src="https://d3js.org/d3.v4.min.js" ></script>
+<script>
+  /*
+  const CORAL100 = d3.rgb(234,78,68);
+  const CORAL75 = d3.rgb(240,130,109);
+  const CORAL50 = d3.rgb(246,175,157);
+  const CORAL25 = d3.rgb(252,218,206);
+  const VIOLET100 = d3.rgb(58,47,85);
+  const VIOLET75 = d3.rgb(107,99,128);
+  const VIOLET50 = d3.rgb(156,151,170);
+  const VIOLET25 = d3.rgb(206,203,212);
+  const EGGPLANT100 = d3.rgb(40,29,59);
+  const EGGPLANT75 = d3.rgb(94,86,108);
+  const EGGPLANT50 = d3.rgb(147,142,157);
+  const EGGPLANT25 = d3.rgb(201,198,206);
+  const BLUE100 = d3.rgb(0,142,207);
+  const GREEN100 = d3.rgb(0,167,92);
+  const YELLOW100 = d3.rgb(251,185,0);
+  const WHITE = d3.rgb(255,255,255);
+  const CORAL100 = d3.hsl(d3.rgb(234,78,68));
+  const VIOLET100 = d3.hsl(d3.rgb(58,47,85));
+  const EGGPLANT100 = d3.hsl(d3.rgb(40,29,59));
+  const BLUE100 = d3.hsl(d3.rgb(0,142,207));
+  const GREEN100 = d3.hsl(d3.rgb(0,167,92));
+  const YELLOW100 = d3.hsl(d3.rgb(251,185,0));
+  const CORAL = d3.range(4).map(d => CORAL100.brighter(d*LIGHTER_FACTOR));
+  const VIOLET = d3.range(4).map(d => VIOLET100.brighter(d*LIGHTER_FACTOR));
+  const EGGPLANT = d3.range(4).map(d => EGGPLANT100.brighter(d*LIGHTER_FACTOR));
+  const BLUE = d3.range(4).map(d => BLUE100.brighter(d*LIGHTER_FACTOR));
+//  const GREEN = d3.range(4).map(d => GREEN100.brighter(d*LIGHTER_FACTOR));
+  const GREEN = d3.scaleLinear().domain([0,4]).interpolate(d3.interpolateRgb).range([GREEN100, WHITE]);
+  const YELLOW = d3.range(4).map(d => YELLOW100.brighter(d*LIGHTER_FACTOR));
+  const CORAL100 = d3.rgb(234,78,68);
+  const VIOLET100 = d3.rgb(58,47,85);
+  const EGGPLANT100 = d3.rgb(40,29,59);
+  const BLUE100 = d3.rgb(0,142,207);
+  const GREEN100 = d3.rgb(0,167,92);
+  const YELLOW100 = d3.rgb(251,185,0);
+  const GREY100 = d3.rgb(86,86,86);
+  */
+
+  function colorScale(baseColor) {
+    return d3.scaleLinear().domain([0,4]).interpolate(d3.interpolateRgb).range([baseColor, d3.rgb(255,255,255)]);
+  }
+
+  const COLORS = {
+    "green": colorScale(d3.rgb(0,167,92)),
+    "blue": colorScale(d3.rgb(0,142,207)),
+    "coral": colorScale(d3.rgb(234,78,68)),
+    "yellow": colorScale(d3.rgb(251,185,0)),
+    "violet": colorScale(d3.rgb(58,47,85)),
+    "grey": colorScale(d3.rgb(86,86,86))
+  };
+
+  var keys = Object.keys(COLORS);
+
+  var data = keys.reduce(
+    (a,c) =>
+    a.concat(
+      d3.range(4).map(
+        function(d,i) {
+          return {
+            "index": i,
+            "category": c,
+            "rgb": COLORS[c](d)
+          };
+        }
+      )
+    ),
+    []);
+
+  var svg = d3.select("svg"),
+      margin = {top: 20, right: 20, bottom: 30, left: 40},
+      width = +svg.attr("width") - margin.left - margin.right,
+      height = +svg.attr("height") - margin.top - margin.bottom,
+      g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var x = d3.scaleBand()
+  .rangeRound([0, width])
+  .paddingInner(0.3);
+
+  var y = d3.scaleBand()
+  .rangeRound([height, 0]);
+
+  x.domain(keys);
+  var yMax = d3.max(keys.map(k => data.filter(d => d.category === k).length));
+  y.domain(d3.range(0, yMax));
+
+  g.append("g")
+    .selectAll("g")
+    .data(data)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("fill", d => d.rgb)
+    .attr("x", d => x(d.category))
+    .attr("y", d => y(d.index))
+    .attr("height", y.bandwidth())
+    .attr("width", x.bandwidth())
+  ;
+
+    g.selectAll(".bar-label")
+      .data(data)
+    .enter().append("text")
+      .attr("transform", d => "rotate(-90 " + (x(d.category) + x.bandwidth()/2) + "," + (y(d.index) + y.bandwidth()/2) + "), translate("+ 0 +"," + (x.bandwidth()/2 + 10) + ")")
+      .attr("class", "bar-label")
+      .attr("x", d => x(d.category) + x.bandwidth()/2)
+      .attr("y", d => y(d.index) - y.bandwidth()/2)
+      .attr("dy", y.bandwidth())
+      .attr("text-anchor", "middle")
+    	.attr("font-size", "10px")
+      .text(d => d.rgb);
+
+  g.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+  g.append("g")
+      .attr("class", "axis")
+	    .attr('class', 'y axis')
+      .attr("transform", "translate(" + -10 + "," + 0 + ")")
+      .call(d3.axisLeft(y)
+            //.tickFormat(d => 100 - d*25)
+           );
+
+</script>
