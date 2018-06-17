@@ -1,198 +1,594 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,500,700" rel="stylesheet">
-</head>
-<style>
-body {
-  background-color: #F1F3F3
-}
-.axis {
-	font: 15px sans-serif;
-}
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #D4D8DA;
-  stroke-width: 2px;
-  shape-rendering: crispEdges;
-}
-#chart {
-	position: absolute;
-	top: 60px;
-	left: -20px;
-}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset = "UTF-8" />
 
-  .toolTip {
-  pointer-events: none;
-	position: absolute;
-    display: none;
-  min-width: 50px;
-  height: auto;
-  background: none repeat scroll 0 0 #ffffff;
-  padding: 9px 14px 6px 14px;
-  border-radius: 2px;
-  text-align: center;
-  line-height: 1.3;
-  color: #5B6770;
-  box-shadow: 0px 3px 9px rgba(0, 0, 0, .15);
-}
-.toolTip:after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-top: 12px solid white;
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  margin-left: -12px;
-}
-.toolTip span {
-	font-weight: 500;
-  color: #081F2C;
-}
-</style>
+  <!-- CDN scripts -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <!-- data source -->
+  <script type="text/javascript" src="data.json"></script>
 
+  <!-- element styling -->
   <style>
+    body {
+      /* background-image: none; */
+    }
+    #summary {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.4em;
+      font-variant: small-caps;
+      font-weight: 500;
+      text-align:center;
+      outline:none;
+      letter-spacing: 1.5px;
+      padding:10px 0px 0px 10px;
+      width:960px;
+      margin: 0 auto;
+    }
+    #content {
+      width:960px;
+      text-align:center;
+      margin: 0 auto;
+    }
+    #inputSliders {
+      font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+      text-align:justify;
+      outline:none;
+      padding:0px 0px 0px 0px;
+      width:960px;
+      margin: 0 auto;
+    }
 
-  .axis path, .axis--x line {
-    display: none;
-  }
+    .inputgroup {
+      border: 4px double cornflowerblue;
+      /* display: flex;
+      flex-wrap: nowrap; */
+    }
+    .slider {
+      width:164.8px;
+      float: left;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: initial;
+      padding:10px;
+      height:100px;
+      /* display: -webkit-flex;
+      -webkit-flex-flow: row-reverse wrap; */
+      /* display: flex;
+      flex-wrap: initial; */
+    }
+    .slider2 {
+      width:234px;
+      float:left;
+      padding:14px 0px 1px 0px;
+    }
+    label {
+      float:left;
+      font-weight:bold;
+      text-align:center;
+      padding-bottom:20px;
+    }
+    input[type=range] {
+      float:none;
+      clear: both;
+      margin:10px 0px 0px 20px;
+      text-align:center;
+      width:130px;
+    }
+    input[type=range]::-ms-track {
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+      -webkit-appearance: none
+    }
+    input[type=range]::-ms-track {
+      -ms-appearance: none;
+      height: 3px;
+      background-color: #d5d5d5;
+      margin-right: 0;
+    	margin-top: 5px;
+      margin-bottom: 5px;
+      border:0;
+    }
+    input[type=range]::-ms-thumb {
+      background-color: #FFF;
+      border: 3px solid rgb(150,150,150);
+      border-radius: 5px;
+      height: 10px;
+      width: 1px;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      height: 5px;
+      background:#7c7c7c;
+      margin-top: -2px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      margin-top:-5px;
+    }
+    #inputSliders p {
+      padding-top:1px;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    #ventilation {background-color:#f2f2f2}
+    #equipment {background-color:#e6e6e6}
+    #hoodDensity {background-color:#f2f2f2}
+    #uvalue {background-color:#e6e6e6}
+    #rvalue {background-color:#f2f2f2}
+    #hvacType {background-color:#e6e6e6}
+    #heatRecovery {background-color:#f2f2f2}
+    #ventilation {background-color:#f2f2f2}
+    #autoclosers {background-color:#e6e6e6}
+    #minimumflow {background-color:#f2f2f2}
+    #heatingsource {background-color:#e6e6e6}
 
-  input {
-    position: absolute;
-   	left: 130px;
-    top:500px;
-    width:150px;
-  }
-
+    #euidiv1 {background-color:#f2f2f2}
+    #euidiv2 {background-color:#e6e6e6}
+    #peakcooldiv {background-color:#f2f2f2}
+    #peakheatdiv {background-color:#e6e6e6}
   </style>
-  <svg width="900" height="700"></svg>
-  <script src="//d3js.org/d3.v4.min.js"></script>
-	<script src="RadarChart.js"></script>
-	<script src="https://d3js.org/d3-color.v1.min.js"></script>
-	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <input type="range" min="0" max="100" step="25" value="0">
+</head>
+
+<body>
+  <!-- summary figures bar -->
+  <div id="summary">
+    <div class="slider2" id="euidiv1"><div id="eui1"></div><p style="margin-top:3px;">Guaranteed<br>Compensation</p></div>
+    <div class="slider2" id="euidiv2"><div id="eui2"></div><p style="margin-top:3px;">Incentive<br>Compensation</p></div>
+    <div class="slider2" id="peakcooldiv"><div id="peakcool"></div><p style="margin-top:3px;">Low-end<br>Value Estimate</p></div>
+    <div class="slider2" id="peakheatdiv"><div id="peakheat"></div><p style="margin-top:3px;">High-end<br>Value Estimate</p></div>
+  </div>
+
+   <!-- stacked bar charts -->
+  <div id="content">
+  </div>
+
+  <!-- input sliders -->
+  <div id="inputSliders">
+			<form id="sliders" autocomplete="off">
+				<fieldset class="inputgroup">
+
+          <!-- cash salary -->
+          <div class="slider" id="ventilation">
+            <label>Cash Salary</label>
+					  <input type="range" name="cashSal" id="cashSal" value="0" min="0" max="1"  step = "1">
+            <p id="ventoutput">$90k</p>
+          </div>
+
+          <!-- equity salary -->
+          <div class="slider" id="equipment">
+            <label>Equity Salary</label>
+  					<input type="range" name="equip" id="equip" value="6" min="3" max="12"  step = "3">
+            <p id="equipoutput">6k options*</p>
+          </div>
+
+          <!-- benefits -->
+          <div class="slider" id="hoodDensity">
+            <label>Benefits/Subsidies</label>
+  					<input type="range" name="hoodD" id="hoodD" value="0.5" min="0.5" max="1.5" step = "1">
+            <p id="hoodoutput">0.5</p>
+          </div>
+
+          <!-- professional development -->
+          <div class="slider" id="uvalue">
+            <label>Professional L&E</label>
+  					<input type="range" name="uval" id="uval" value="2" min="0" max="2" step = "1">
+            <p id="uvaloutput">$4k</p>
+          </div>
+
+          <!-- vacation -->
+          <div class="slider" id="rvalue">
+            <label>Weeks of Vacation</label>
+  					<input type="range" name="rval" id="rval" value="0" min="0" max="1"  step = "1">
+            <p id="rvaloutput">3</p>
+          </div>
+
+          <!-- cash bonus -->
+          <div class="slider" id="hvacType">
+            <label>Cash Bonus</label>
+  					<input type="range" name="hvac" id="hvac" value="0" min="0" max="2"  step = "1">
+            <p id="hvacoutput">0%</p>
+          </div>
+
+          <!-- equity bonus -->
+          <div class="slider" id="heatRecovery">
+            <label>Equity Bonus</label>
+  					<input type="range" name="heatr" id="heatr" value="0.5" min="0.1" max="0.50"  step = "0.2">
+            <p id="heatroutput">50%</p>
+          </div>
+
+          <!-- 401k match -->
+          <div class="slider" id="autoclosers">
+            <label>401k Match</label>
+  					<input type="range" name="autoc" id="autoc" value="0" min="0" max="1"  step = "1">
+            <p id="autocoutput">No</p>
+          </div>
+
+          <!-- personal development -->
+          <div class="slider" id="minimumflow">
+            <label>Personal L&E</label>
+  					<input type="range" name="minflow" id="minflow" value="25" min="10" max="25"  step = "15">
+            <p id="minflowoutput">$500</p>
+          </div>
+
+          <!-- health insurance -->
+          <div class="slider" id="heatingsource">
+            <label>Health Insurance</label>
+  					<input type="range" name="hsource" id="hsource" value="0" min="0" max="1"  step = "1">
+            <p id="hsourceoutput">Silver</p>
+          </div>
+				</fieldset>
+			</form>
+		</div>
+
+
   <script>
-    var svg = d3.select("svg"),
-      margin = {top: 150, right: 150, bottom: 100, left: 450},
-      width = +svg.attr("width") - margin.left - margin.right,
-      height = +svg.attr("height") - margin.top - margin.bottom,
+    // Load data
+    var dataObj = JSON.parse(allResults)
+
+    // Get inputs from the sliders
+    var CashSal = $("#cashSal").val().toString(); // Lab Ventilation
+    var Equip = $("#equip").val().toString(); // Lab Equipment
+    var HoodD = $("#hoodD").val().toString(); // Fume Hood Density
+    var uValue = $("#uval").val().toString(); //U-value
+    var rValue = $("#rval").val().toString(); //R-value
+    var HVAC = $("#hvac").val().toString(); // HVAC Type
+    var hRecovery = $("#heatr").val().toString(); // Heat Recovery
+    var AutoC = $("#autoc").val().toString(); // Sash AutoClosers
+    var MinFlow = $("#minflow").val().toString(); // Fume Hood Minimum Flow
+    var hSource = $("#hsource").val().toString(); // Hot Water Source
+
+
+    // Dictionary to interpret the meaning of the integer inputs.
+    uValueDict = {'0':'0', '1':'4', '2':'5'}
+    rValueDict = {'0':'3', '1':'20'}
+    hvacTypeDict = {'0':'30%', '1':'10%', '2':'0%'}
+    labVentDict = {'0':'$90k', '1':'$120k'}
+    autoClosDict = {'0':'No', '1':'Yes'}
+    hSourceDict = {'0':'silver', '1':'gold'}
+
+    // Update inputs
+
+    $("#cashSal").on("input", function(event) {
+      CashSal = $(this).val();
+      $("#ventoutput").text(labVentDict[Vent]);
+      updateEnergy();
+    });
+
+    $("#equip").on("input", function(event) {
+      Equip = $(this).val();
+      $("#equipoutput").text(Equip.toString() + 'k options (4-yr vesting)');
+      updateEnergy();
+    });
+
+    $("#hoodD").on("input", function(event) {
+      HoodD = $(this).val();
+      $("#hoodoutput").text(HoodD.toString());
+      updateEnergy();
+    });
+
+    $("#uval").on("input", function(event) {
+      uValue = $(this).val();
+      $("#uvaloutput").text('$' + uValueDict[uValue] + 'k');
+      updateEnergy();
+    });
+
+    $("#rval").on("input", function(event) {
+      rValue = $(this).val();
+      $("#rvaloutput").text(rValueDict[rValue]);
+      updateEnergy();
+    });
+
+    $("#hvac").on("input", function(event) {
+      HVAC = $(this).val();
+      $("#hvacoutput").text(hvacTypeDict[HVAC]);
+      updateEnergy();
+    });
+
+    $("#heatr").on("input", function(event) {
+      hRecovery = $(this).val();
+      $("#heatroutput").text((hRecovery*100).toString() + "%");
+      updateEnergy();
+    });
+
+    $("#autoc").on("input", function(event) {
+      AutoC = $(this).val();
+      $("#autocoutput").text(autoClosDict[AutoC]);
+      updateEnergy();
+    });
+
+    $("#minflow").on("input", function(event) {
+      MinFlow = $(this).val();
+      $("#minflowoutput").text(MinFlow.toString() + 'cfm');
+      updateEnergy();
+    });
+
+    $("#hsource").on("input", function(event) {
+      hSource = $(this).val();
+      $("#hsourceoutput").text(hSourceDict[hSource]);
+      updateEnergy();
+    });
+
+
+    // Function to update the charts.
+    updateEnergy = function(){
+    	// Retrieve the energy use and peak load data from the json.
+      var hRoption = 1
+      if (hRecovery == 0.5) {
+        var hRoption = 0
+      }
+      var ventOption = 1
+      if (CashSal == 1) {
+        var ventOption = 1.33
+      }
+      if (HoodD == 0.5) {
+        AutoC = 0
+      }
+      var windowOption = Math.abs(uValue-2)
+      var inputList = [rValue, windowOption, HVAC, hRoption, HoodD, ventOption, AutoC, MinFlow, Equip]
+      var jsonStr = inputList.join(',')
+      var rawData = dataObj[jsonStr][0]
+      var data = [rawData[2], rawData[3], rawData[1], rawData[0], rawData[4], rawData[5]]
+      var coolElectr = rawData[0] / 27
+      var heatFuel = rawData[1] / 0.7
+      if (hSource == 1){
+        var heatFuel = rawData[1] / 0.95
+      }
+      var siteEUIData = [rawData[2], rawData[3], heatFuel, coolElectr, rawData[4], rawData[5]]
+      var peakData = dataObj[jsonStr][1]
+      var floorArea = 1194
+      peakData = [peakData[0]/floorArea, peakData[1]/floorArea]
+
+      // Update the energy chart.
+      svg2.selectAll('.energyBar').remove();
+      stackIncrement = 0
+      for (i = 0; i < data.length; i++) {
+        svg2.append("rect")
+          .attr("x", margin.left + barSpacer)
+          .attr("y", svgheight- margin.bottom - yScale(maxEUI-data[i]) - yScale(maxEUI - stackIncrement))
+          .attr("width", 100)
+          .attr("height", yScale(maxEUI - data[i]))
+          .attr('fill', colors[i])
+        	.attr("class", "energyBar")
+          .style("stroke", "#000")
+          .style("stroke-width", "0.05em");
+        stackIncrement += data[i]
+			}
+
+      // Update the energy chart.
+      svg4.selectAll('.energyBar').remove();
+      stackIncrement = 0
+      for (i = 0; i < siteEUIData.length; i++) {
+        svg4.append("rect")
+          .attr("x", margin.left + barSpacer)
+          .attr("y", svgheight- margin.bottom - yScale(maxEUI-siteEUIData[i]) - yScale(maxEUI - stackIncrement))
+          .attr("width", 100)
+          .attr("height", yScale(maxEUI - siteEUIData[i]))
+          .attr('fill', colors[i])
+        	.attr("class", "energyBar")
+          .style("stroke", "#000")
+          .style("stroke-width", "0.05em");
+        stackIncrement += siteEUIData[i]
+			}
+
+      // Update the peak loads chart.
+      svg3.selectAll('.peakBar').remove();
+      for (i = 0; i < peakData.length; i++) {
+        svg3.append("rect")
+          .attr("x", peakMarginLeft + barSpacer + 100*i)
+          .attr("y", svgheight- margin.bottom - yPeakScale(maxPeak-peakData[i]))
+          .attr("width", 60)
+          .attr("height", yPeakScale(maxPeak - peakData[i]))
+          .attr('fill', peakColors[i])
+        	.attr("class", "peakBar")
+          .style("stroke", "hsla(127, 100%, 7%, 0.88)")
+          .style("stroke-width", "0.15em");
+			}
+
+      // Update the metrics on the bottom.
+      d3.selectAll(".resultText").remove();
+
+      // Calculate the metrics.
+      var EUI1 = precisionRound(rawData.reduce(add, 0),1);
+      var EUI2 = precisionRound(siteEUIData.reduce(add, 0),1);
+
+      d3.select("#eui1").append("text")
+      	.attr("class", "resultText")
+        .attr("text-anchor", "start")
+        .attr("fill", "#000")
+    		.style('font-size', '30px')
+    		.style('font-family', 'sans-serif')
+        .text(EUI1.toString());
+     	d3.select("#eui2").append("text")
+      	.attr("class", "resultText")
+        .attr("text-anchor", "start")
+        .attr("fill", "#000")
+    		.style('font-size', '30px')
+    		.style('font-family', 'sans-serif')
+        .text(EUI2.toString());
+      d3.select("#peakcool").append("text")
+      	.attr("class", "resultText")
+        .attr("text-anchor", "start")
+        .attr("fill", "#000")
+    		.style('font-size', '30px')
+    		.style('font-family', 'sans-serif')
+        .text(precisionRound(peakData[0],1).toString());
+      d3.select("#peakheat").append("text")
+      	.attr("class", "resultText")
+        .attr("text-anchor", "start")
+        .attr("fill", "#000")
+    		.style('font-size', '30px')
+    		.style('font-family', 'sans-serif')
+        .text(precisionRound(peakData[1],1).toString());
+    }
+
+
+    // Utility Functions
+    function add(a, b) {
+    	return a + b;
+		}
+    function precisionRound(number, precision) {
+  		var factor = Math.pow(10, precision);
+  		return Math.round(number * factor) / factor;
+		}
+
+
+    // Properties of the Energy Chart
+    var maxEUI = 300
+    var colors = ["rgb(255,255,0)", "rgb(191,191,191)", "rgb(255,0,102)", "rgb(0,176,240)","rgb(166,216,110)","rgb(119,185,49)"]
+    var energyTypes = ["401k Match", "Equity", "Bonus", "Salary","Stipends","Development"]
+
+    // Pixel sizes of the Energy Chart
+    margin = {top: 20, right: 40, bottom: 30, left: 70};
+    svgwidth = 300
+    svgheight = 400
+    barSpacer = 35
+
+    width = svgwidth - margin.left - margin.right
+    height = svgheight - margin.top - margin.bottom
+
+    var x = d3.scaleBand()
+      .rangeRound([0, svgwidth])
+      .padding(0.1)
+      .align(0.1);
+
+    var yScale = d3.scaleLinear()
+          .domain([0,	maxEUI])
+          .rangeRound([height, 0]);
+
+    // Layout the EUI charts.
+    buildEUIChar = function(axisText) {
+      var svg = d3.select("#content").append("svg")
+      .attr("width", svgwidth)
+      .attr("height", svgheight)
+
       g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  var x = d3.scaleBand()
-      .rangeRound([5, width])
-      .padding(0.218917888)
-      .align(0.75);
-
-  var y = d3.scaleLinear()
-      .rangeRound([height, 0]);
-
-  var z = d3.scaleOrdinal(d3.schemeSet3)
-
-
-  var stack = d3.stack();
-
-  d3.csv("data.csv", function(error, data) {
-    if (error) throw error;
-
-    var data_nest = d3.nest()
-                      .key(function(d){
-                          return d.Slider
-                      })
-                      .entries(data);
-
-    data = data_nest.filter(function(d){ return d.key == 0})[0].values;
-
-    var cat = ["first","second","third"];
-
-    x.domain(data.map(function(d) { return d.x; }));
-    y.domain([0, 100]).nice();
-    z.domain(cat);
-
-    g.selectAll(".serie")
-      .data(stack.keys(cat)(data))
-      .enter().append("g")
-        .attr("class", "serie")
-        .attr("fill", function(d) {return z(d.key); })
-      .selectAll("rect")
-      .data(function(d) { return d; })
-      .enter().append("rect")
-        .attr("x", function(d) { return x(d.data.x); })
-        .attr("y", function(d) { return y(d[1]) - 0; })
-        .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-        .attr("width", x.bandwidth() + 1);
-
-    g.append("g")
+      g.append("g")
         .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + 450 + ")")
-// 		    .attr("transform", "translate(0," + height + ")")
-        .style("font", "18px sans-serif")
+        .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
 
-    g.append("g")
+      g.append("g")
+          .attr("class", "axis axis--y")
+          .call(d3.axisLeft(yScale).ticks(10, "s"))
+        .append("text")
+          .attr("x", 10)
+          .attr("y", yScale(yScale.ticks(10).pop()))
+          .attr("dy", "0.35em")
+          .attr("text-anchor", "start")
+          .attr("fill", "#000")
+          .style('font-size', '14px')
+          .text(axisText);
+      g.append("text")
+          .attr("x", 10)
+          .attr("y", 18)
+          .attr("dy", "0.35em")
+          .attr("text-anchor", "start")
+          .attr("fill", "#000")
+          .style('font-size', '11px')
+          .style('font-family', 'sans-serif')
+          .text("(Projected Value)");
+
+      // Add the legend.
+        spacerIncrement = 0
+        for (i = 0; i < energyTypes.length; i++) {
+          svg.append("rect")
+            .attr("x", svgwidth - 11)
+            .attr("y", margin.top + spacerIncrement + 120)
+            .attr("width", 10)
+            .attr("height", 10)
+            .attr('fill', colors[i])
+            .style("stroke", "#000")
+            .style("stroke-width", "0.05em");
+          svg.append("text")
+            .attr("x",svgwidth - 15)
+            .attr("y", margin.top + spacerIncrement + 120)
+            .attr("dy", "10px")
+            .attr("text-anchor", "end")
+            .attr("fill", "#000")
+            .style('font-family', 'sans-serif')
+            .style('font-size', '12px')
+            .text(energyTypes[i]);
+          spacerIncrement += 20
+        }
+      return svg
+    }
+
+    svg2 = buildEUIChar('Guaranteed Compensation');
+    svg4 = buildEUIChar('Incentive Compensation');
+
+
+
+    // Properties of the Peak Loads Chart
+    var maxPeak = 8
+    var peakColors = ["rgb(9, 122, 47)", "rgba(0, 175, 23, 0.53)"]
+    var peakTypes = ["Guaranteed", "Incentive"]
+    var peakMarginLeft = 70
+
+    // Layout the chart.
+    var svg3 = d3.select("#content").append("svg")
+    .attr("width", svgwidth)
+    .attr("height", svgheight)
+    g2 = svg3.append("g").attr("transform", "translate(" + peakMarginLeft + "," + margin.top + ")");
+
+    var yPeakScale = d3.scaleLinear()
+    		.domain([0,	maxPeak])
+        .rangeRound([height, 0]);
+
+    g2.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+    g2.append("g")
         .attr("class", "axis axis--y")
-        .attr("transform","translate(" + width + ",0)")
-        .call(d3.axisRight(y).ticks(5, "s"))
+        .call(d3.axisLeft(yPeakScale).ticks(10, "s"))
       .append("text")
-        .attr("x", 2)
-        .attr("y", y(y.ticks(5).pop()))
+        .attr("x", 10)
+        .attr("y", yPeakScale(yPeakScale.ticks(10).pop()))
         .attr("dy", "0.35em")
         .attr("text-anchor", "start")
-        .attr("fill", "#000000");
+        .attr("fill", "#000")
+    		.style('font-size', '14px')
+        .text("Risk Profile");
+   	g2.append("text")
+        .attr("x", 10)
+        .attr("y", 18)
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "start")
+        .attr("fill", "#000")
+    		.style('font-size', '11px')
+    		.style('font-family', 'sans-serif')
+        .text("(Fixed vs. Variable)");
 
-    d3.select("input")
-      .on("input", changed)
-      .on("change", changed);
+    // Add the legend.
+      spacerIncrement = 0
+      for (i = 0; i < peakTypes.length; i++) {
+        svg3.append("rect")
+          .attr("x", svgwidth - 30)
+          .attr("y", margin.top + spacerIncrement)
+          .attr("width", 10)
+          .attr("height", 10)
+          .attr('fill', peakColors[i])
+          .style("stroke", "#000")
+          .style("stroke-width", "0.05em");
+       	svg3.append("text")
+          .attr("x",svgwidth - 35)
+          .attr("y", margin.top + spacerIncrement)
+          .attr("dy", "10px")
+          .attr("text-anchor", "end")
+          .attr("fill", "#000")
+        	.style('font-family', 'sans-serif')
+					.style('font-size', '12px')
+          .text(peakTypes[i]);
+        spacerIncrement += 20
+			}
 
-    function changed() {
-      var value = this.value;
+		updateEnergy()
 
-      g.selectAll(".serie")
-        .data(stack.keys(cat)(data_nest.filter(function(d){return +d.key == value})[0].values))
-        .selectAll("rect")
-        .data(function(d) { return d; })
-        .transition()
-        .duration(500)
-        .delay(function(d,i){return i*100})
-        .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-        .attr("x", function(d) { return x(d.data.x); })
-        .attr("y", function(d) { return y(d[1]); })
-  }
-
-  });
-
-
+    d3.select(self.frameElement).style("height", 800 + "px");
   </script>
 
-
-<div id="chart"></div>
-
-<script>
-var width = 300,
-    height = 300;
-
-// Config for the Radar chart
-var config = {
-    w: width,
-    h: height,
-    maxValue: 100,
-    levels: 5,
-    ExtraWidthX: 300
-}
-
-//Call function to draw the Radar chart
-d3.json("data.json", function(error, data) {
-    if (error) throw error;
-    RadarChart.draw("#chart", data, config);
-});
-
-var svg = d3.select('body')
-	.selectAll('svg')
-	.append('svg')
-	.attr("width", width)
-	.attr("height", height);
-</script>
+</body>
