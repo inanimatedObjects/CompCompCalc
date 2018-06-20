@@ -141,7 +141,7 @@
   <div id="summary">
     <div class="slider2" id="euidiv1">
       <div id="eui1"></div>
-      <p style="margin-top:3px;">Guaranteed<br>Compensation</p>
+      <p style="margin-top:3px;">Base<br>Compensation</p>
     </div>
 
     <div class="slider2" id="euidiv2">
@@ -332,9 +332,9 @@
     });
 
 
-    // Function to update the charts.
+// ============= function to update data driving the charts ===================
     updateEnergy = function(){
-    	// Retrieve the energy use and peak load data from the json.
+    	// Retrieve and load data from the json.
       var hRoption = 1
       if (hRecovery == 0.5) {
         var hRoption = 0
@@ -363,7 +363,7 @@
       var floorArea = 1194
       peakData = [peakData[0]/floorArea, peakData[1]/floorArea]
 
-      // Update the energy chart.
+      // Update guaranteed comp chart
       svg2.selectAll('.energyBar').remove();
       stackIncrement = 0
       for (i = 0; i < data.length; i++) {
@@ -379,7 +379,7 @@
         stackIncrement += data[i]
 			}
 
-      // Update the energy chart.
+      // Update incentive comp chart
       svg4.selectAll('.energyBar').remove();
       stackIncrement = 0
       for (i = 0; i < siteEUIData.length; i++) {
@@ -395,7 +395,7 @@
         stackIncrement += siteEUIData[i]
 			}
 
-      // Update the peak loads chart.
+      // Update the risk profile chart
       svg3.selectAll('.peakBar').remove();
       for (i = 0; i < peakData.length; i++) {
         svg3.append("rect")
@@ -409,7 +409,7 @@
           .style("stroke-width", "0.15em");
 			}
 
-      // Update the metrics on the bottom.
+      // Update the summary metrics at the top
       d3.selectAll(".resultText").remove();
 
       // Calculate the metrics.
@@ -447,7 +447,7 @@
     }
 
 
-    // Utility Functions
+    // ================== Utility Functions =====================
     function add(a, b) {
     	return a + b;
 		}
@@ -457,30 +457,40 @@
 		}
 
 
-    // Properties of the Energy Chart
+    // ========= Properties of Guranteed & Incentive Comp Charts ========
     const maxEUI = 300
-    const colors = ["rgb(255,255,0)", "rgb(191,191,191)", "rgb(255,0,102)", "rgb(0,176,240)","rgb(166,216,110)","rgb(119,185,49)"]
-    const energyTypes = ["401k Match", "Equity", "Bonus", "Salary","Stipends","Development"]
+    const cashSalary = "rgb(0,176,240)"
+    const cashBonus = "rgb(255,0,102)"
+    const equity = "rgb(191,191,191)"
+    const match = "rgb(255,255,0)"
+    const stipends = "rgb(166,216,110)"
+    const peopleDev = "rgb(119,185,49)"
 
-    // Pixel sizes of the Energy Chart
+
+    const colors = ["rgb(255,255,0)", "rgb(191,191,191)", "rgb(255,0,102)", "rgb(0,176,240)","rgb(166,216,110)","rgb(119,185,49)"]
+    const energyTypes = ["401k Match", "Equity", "Bonus", "Salary","Perks/Reimbursements","Self Development"]
+
+    // ============== chart dimensions  ======================
     margin = {top: 20, right: 40, bottom: 30, left: 70};
     svgwidth = 300
-    svgheight = 400
-    barSpacer = 35
+    svgheight = 600
+    barSpacer = 15
 
     width = svgwidth - margin.left - margin.right
     height = svgheight - margin.top - margin.bottom
 
+    // ========= set the x-axis for rendered charts ============== NOTE: confirm
     const x = d3.scaleBand()
       .rangeRound([0, svgwidth])
       .padding(0.1)
       .align(0.1);
 
+  // ========= set the y-axis for rendered charts ==============
     const yScale = d3.scaleLinear()
           .domain([0,	maxEUI])
           .rangeRound([height, 0]);
 
-    // Layout the EUI charts.
+    // ================== comp charts layout ===================
     buildEUIChar = function(axisText) {
       const svg = d3.select("#content").append("svg")
       .attr("width", svgwidth)
