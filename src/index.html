@@ -334,7 +334,7 @@
 
 // ============= function to update data driving the charts ===================
     updateEnergy = function(){
-    	// Retrieve and load data from the json.
+    // Retrieve and load data from the json.
       var hRoption = 1
       if (hRecovery == 0.5) {
         var hRoption = 0
@@ -363,7 +363,7 @@
       var floorArea = 1194
       peakData = [peakData[0]/floorArea, peakData[1]/floorArea]
 
-      // Update guaranteed comp chart
+    // Update base comp chart
       svg2.selectAll('.energyBar').remove();
       stackIncrement = 0
       for (i = 0; i < data.length; i++) {
@@ -379,7 +379,7 @@
         stackIncrement += data[i]
 			}
 
-      // Update incentive comp chart
+    // Update incentive comp chart
       svg4.selectAll('.energyBar').remove();
       stackIncrement = 0
       for (i = 0; i < siteEUIData.length; i++) {
@@ -395,7 +395,7 @@
         stackIncrement += siteEUIData[i]
 			}
 
-      // Update the risk profile chart
+    // Update the risk profile chart
       svg3.selectAll('.peakBar').remove();
       for (i = 0; i < peakData.length; i++) {
         svg3.append("rect")
@@ -409,10 +409,10 @@
           .style("stroke-width", "0.15em");
 			}
 
-      // Update the summary metrics at the top
+    // Update the summary metrics at the top
       d3.selectAll(".resultText").remove();
 
-      // Calculate the metrics.
+    // Calculate the metrics.
       const EUI1 = precisionRound(rawData.reduce(add, 0),1);
       const EUI2 = precisionRound(siteEUIData.reduce(add, 0),1);
 
@@ -447,7 +447,7 @@
     }
 
 
-    // ================== Utility Functions =====================
+  // ================== Utility Functions =====================
     function add(a, b) {
     	return a + b;
 		}
@@ -457,7 +457,7 @@
 		}
 
 
-    // ========= Properties of Guranteed & Incentive Comp Charts ========
+  // ========= Properties of Guranteed & Incentive Comp Charts ========
     const maxEUI = 300
     const cashSalary = "rgb(0,176,240)"
     const cashBonus = "rgb(255,0,102)"
@@ -548,15 +548,16 @@
       return svg
     }
 
-    svg2 = buildEUIChar('Guaranteed Compensation');
+  // ========== instantiate base and incentive comp charts ===============
+    svg2 = buildEUIChar('Base Compensation');
     svg4 = buildEUIChar('Incentive Compensation');
 
 
 
-    // Properties of the Peak Loads Chart
+  // ============ Properties of the Risk Profile chart =================
     const maxPeak = 10
     const peakColors = ["rgb(16,209,222)", "rgb(255,137,223)"]
-    const peakTypes = ["Guaranteed", "Incentive"]
+    const peakTypes = ["Base", "Incentive"]
     const peakMarginLeft = 46
 
     // Layout the chart.
