@@ -1,0 +1,24 @@
+{
+    "name": "CompCompCalc",
+    "version": "0.1.0",
+    "description": "Comprehensive Compensation Calculator",
+    "keywords": [
+      "data visualization",
+      "d3"
+    ],
+    "homepage": "compcompcalc.com",
+    "author": {
+      "name": "inanimatedObjects",
+      "url": "inanimatedObjects.com"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/inanimatedObjects/CompCompCalc"
+    },
+    "dependencies": {
+        "d3":"4.x"
+    }, 
+    "devDependencies": {
+        "uglify-js": "2.x"
+    }
+  }
