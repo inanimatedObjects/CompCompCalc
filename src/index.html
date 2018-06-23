@@ -409,10 +409,10 @@
           .style("stroke-width", "0.15em");
 			}
 
-    // Update the summary metrics at the top
+    // ============ update the summary metrics at the top ==========
       d3.selectAll(".resultText").remove();
 
-    // Calculate the metrics.
+    // Calculate the metrics
       const EUI1 = precisionRound(rawData.reduce(add, 0),1);
       const EUI2 = precisionRound(siteEUIData.reduce(add, 0),1);
 
@@ -523,7 +523,7 @@
           .style('font-family', 'sans-serif')
           .text("(Projected Value)");
 
-      // Add the legend.
+      // Add the comp charts legend.
         spacerIncrement = 0
         for (i = 0; i < energyTypes.length; i++) {
           svg.append("rect")
@@ -560,7 +560,7 @@
     const peakTypes = ["Base", "Incentive"]
     const peakMarginLeft = 46
 
-    // Layout the chart.
+    // =========== layout the chart =============
     const svg3 = d3.select("#content").append("svg")
     .attr("width", svgwidth)
     .attr("height", svgheight)
