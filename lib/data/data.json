@@ -1,0 +1,28 @@
+[
+  {"unit": "$/year", "compType": "salary", "min": 100, "baseDriver": 150, "max": 200, "normalizeFn": 1, "category": "Base", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$/year", "compType": "match401k", "min": 0, "baseDriver": 5, "max": 6, "normalizeFn": 1, "category": "Base", "recurring": true, "guaranteed": true, "percentRealization": 50},
+
+  {"unit": "$", "compType": "signingBonus", "min": 5, "baseDriver": 8, "max": 12, "normalizeFn": 1, "category": "Incentive", "recurring": false, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$", "compType": "annualBonus", "min": 10, "baseDriver": 25, "max": 50, "normalizeFn": 1, "category": "Incentive", "recurring": true, "guaranteed": false, "percentRealization": 50},
+
+  {"unit": "$/month", "compType": "employerPaidHealth", "min": 0.4, "baseDriver": 1.5, "max": 2.2, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$/month", "compType": "stipends", "min": 0, "baseDriver": 1.5, "max": 3, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": false, "percentRealization": 100},
+  {"unit": "$/month", "compType": "subsidies", "min": 0, "baseDriver": 1, "max": 2, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$/month", "compType": "misc", "min": 0, "baseDriver": 0, "max": 5, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+
+  {"unit": "$/year", "compType": "professionalDev", "min": 0, "baseDriver": 1.5, "max": 2.0, "normalizeFn": 1, "category": "Education", "recurring": true, "guaranteed": true, "percentRealization": 70},
+  {"unit": "$/year", "compType": "personalDev", "min": 0, "baseDriver": 0.5, "max": 0.5, "normalizeFn": 1, "category": "Education", "recurring": true, "guaranteed": true, "percentRealization": 90},
+
+  {"unit": "hours/week", "compType": "timeAllocation", "min": 10, "baseDriver": 32, "max": 80, "normalizeFn": 40, "category": "Availability", "recurring": true, "guaranteed": false, "percentRealization": 80},
+
+  {"unit": "weeks/year", "compType": "vacation", "min": 2, "baseDriver": 4, "max": 6, "normalizeFn": 52, "category": "Availability", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "weeks/year", "compType": "newParent", "min": 0, "baseDriver": 0, "max": 8, "normalizeFn": 52, "category": "Availability", "recurring": false, "guaranteed": true, "percentRealization": 100},
+
+  {"unit": "stockOptions", "compType": "signingOptions", "min": 0, "baseDriver": 10, "max": 20, "normalizeFn": 1, "category": "Equity", "recurring": false, "guaranteed": false, "percentRealization": 25},
+  {"unit": "RSUs", "compType": "signingRSUs", "min": 0, "baseDriver": 0, "max": 25, "normalizeFn": 1, "category": "Equity", "recurring": false, "guaranteed": true, "percentRealization": 25},
+
+  {"unit": "stockOptions/year", "compType": "ESOP", "min": 10, "baseDriver": 15, "max": 30, "normalizeFn": 1, "category": "Equity", "recurring": true, "guaranteed": false, "percentRealization": 25},
+  {"unit": "RSUs/year", "compType": "ESOP", "min": 5, "baseDriver": 15, "max": 20, "normalizeFn": 1, "category": "Equity", "recurring": true, "guaranteed": true, "percentRealization": 25},
+
+
+]
