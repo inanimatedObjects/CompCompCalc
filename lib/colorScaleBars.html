@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body {
+    font-family: "helvetica";
+}
+
+button {
+    margin: 0 7px 0 0;
+    background-color: #f5f5f5;
+    border: 1px solid #dedede;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+
+    font-size: 12px;
+    line-height: 130%;
+    text-decoration: none;
+    font-weight: bold;
+    color: #565656;
+    cursor: pointer;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    margin: 40px;
+    float: left;
+    text-align: center;
+    border: #969696 solid thin;
+    padding: 5px;
+}
+
+.red {
+    background-color: #e9967a;
+    color: #f0f8ff;
+}
+
+.blue {
+    background-color: #add8e6;
+    color: #f0f8ff;
+}
+
+.cell {
+    min-width: 40px;
+    min-height: 20px;
+    margin: 5px;
+    float: left;
+    text-align: center;
+    border: #969696 solid thin;
+    padding: 5px;
+}
+
+.fixed-cell {
+    min-width: 40px;
+    min-height: 20px;
+    margin: 5px;
+    position: fixed;
+    text-align: center;
+    border: #969696 solid thin;
+    padding: 5px;
+}
+
+.h-bar {
+    min-height: 15px;
+    min-width: 10px;
+    background-color: cornflowerblue;
+    margin-bottom: 2px;
+    font-size: 11px;
+    color: #f0f8ff;
+    text-align: left;
+    padding-left: 4px;
+}
+
+.v-bar {
+    min-height: 1px;
+    min-width: 30px;
+    background-color: #4682b4;
+    margin-right: 2px;
+    font-size: 10px;
+    color: #f0f8ff;
+    text-align: center;
+    width: 10px;
+    display: inline-block;
+}
+
+.baseline {
+    height: 1px;
+    background-color: black;
+}
+
+.clear {
+    clear: both;
+}
+
+.selected {
+    background-color: #f08080;
+}
+
+.control-group {
+    padding-top: 10px;
+    margin: 10px;
+}
+
+.table {
+    width: 70%;
+}
+
+.table td, th {
+    padding: 5px;
+}
+
+.table-header {
+    background-color: #00AFEF;
+    font-weight: bold;
+}
+
+.table-row-odd {
+    background-color: #f0f8ff;
+}
+
+.table-row-odd {
+    background-color: #d3d3d3;
+}
+
+.code {
+    display: inline-block;
+    font-style: italic;
+    background-color: #d3d3d3;
+    border: #969696 solid thin;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.countdown{
+    width: 150px;
+    height: 150px;
+    font-size: 5em;
+    font-weight: bold;
+}
+
+.axis .grid-line{
+    stroke: black;
+    shape-rendering: crispEdges;
+    stroke-opacity: .2;
+}
+
+.line{
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2;
+}
+
+.dot {
+  fill: #fff;
+  stroke: steelblue;
+}
+
+.area {
+    stroke: none;
+    fill: steelblue;
+    fill-opacity: .2;
+}
+
+.pie text{
+    fill: white;
+    font-weight: bold;
+}
+
+._0{
+    stroke: none;
+    fill: darkred;
+    fill-opacity: .7;
+}
+
+._1 {
+    stroke: none;
+    fill: red;
+    fill-opacity: .7;
+}
+
+._2 {
+    stroke: none;
+    fill: blue;
+    fill-opacity: .7;
+}
+
+._3 {
+    stroke: none;
+    fill: green;
+    fill-opacity: .7;
+}
+
+._4{
+    stroke: none;
+    fill: yellow;
+    fill-opacity: .7;
+}
+
+._5{
+    stroke: none;
+    fill: blueviolet;
+    fill-opacity: .7;
+}
+
+.bubble{
+    fill-opacity: .3;
+}
+
+.bar{
+    stroke: none;
+    fill: steelblue;
+}
+
+  </style>
+</head>
+
+<body>
+<script type="text/javascript">
+
+  	var data = [
+      {"unit": "$/year", "compType": "salary", "min": 50, "baseDriver": 70, "max": 200, "normalizeFn": 1, "category": "Base", "recurring": true, "guaranteed": true, "percentRealization": 100},
+      {"unit": "$/year", "compType": "match401k", "min": 0, "baseDriver": 5, "max": 6, "normalizeFn": 1, "category": "Base", "recurring": true, "guaranteed": true, "percentRealization": 50},
+
+      {"unit": "$", "compType": "signingBonus", "min": 5, "baseDriver": 8, "max": 12, "normalizeFn": 1, "category": "Incentive", "recurring": false, "guaranteed": true, "percentRealization": 100},
+      {"unit": "$", "compType": "annualBonus", "min": 10, "baseDriver": 25, "max": 50, "normalizeFn": 1, "category": "Incentive", "recurring": true, "guaranteed": false, "percentRealization": 50},
+
+      {"unit": "$/month", "compType": "employerPaidHealth", "min": 0.4, "baseDriver": 1.5, "max": 2.2, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+      {"unit": "$/month", "compType": "stipends", "min": 0, "baseDriver": 1.5, "max": 3, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": false, "percentRealization": 100},
+      {"unit": "$/month", "compType": "subsidies", "min": 0, "baseDriver": 1, "max": 2, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+      {"unit": "$/month", "compType": "misc", "min": 0, "baseDriver": 0, "max": 5, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+
+      {"unit": "$/year", "compType": "professionalDev", "min": 0, "baseDriver": 1.5, "max": 2.0, "normalizeFn": 1, "category": "Education", "recurring": true, "guaranteed": true, "percentRealization": 70},
+      {"unit": "$/year", "compType": "personalDev", "min": 0, "baseDriver": 0.5, "max": 0.5, "normalizeFn": 1, "category": "Education", "recurring": true, "guaranteed": true, "percentRealization": 90},
+
+      {"unit": "hours/week", "compType": "timeAllocation", "min": 10, "baseDriver": 32, "max": 80, "normalizeFn": 40, "category": "Availability", "recurring": true, "guaranteed": false, "percentRealization": 80},
+
+      {"unit": "weeks/year", "compType": "vacation", "min": 2, "baseDriver": 4, "max": 6, "normalizeFn": 52, "category": "Availability", "recurring": true, "guaranteed": true, "percentRealization": 100},
+      {"unit": "weeks/year", "compType": "newParent", "min": 0, "baseDriver": 0, "max": 8, "normalizeFn": 52, "category": "Availability", "recurring": false, "guaranteed": true, "percentRealization": 0},
+
+      {"unit": "stockOptions", "compType": "signingOptions", "min": 0, "baseDriver": 10, "max": 20, "normalizeFn": 0.25, "category": "Equity", "recurring": false, "guaranteed": false, "percentRealization": 100},
+      {"unit": "RSUs", "compType": "signingRSUs", "min": 0, "baseDriver": 10, "max": 25, "normalizeFn": 0.25, "category": "Equity", "recurring": false, "guaranteed": false, "percentRealization": 100},
+
+      {"unit": "stockOptions/year", "compType": "ESOP", "min": 10, "baseDriver": 15, "max": 30, "normalizeFn": 0.25, "category": "Equity", "recurring": true, "guaranteed": true, "percentRealization": 50},
+      {"unit": "RSUs/year", "compType": "ESOP", "min": 5, "baseDriver": 15, "max": 20, "normalizeFn": 0.25, "category": "Equity", "recurring": true, "guaranteed": true, "percentRealization": 50}
+
+];
+
+   var colorScale = d3.scaleLinear()
+    .domain([0, 100])
+    .range(["#62b4cf", "#ca5357"]);
+
+    function render(data, comparator) {
+        var bars = d3.select("body").selectAll("div.h-bar") // <-B
+                .data(data);
+        // Enter
+        bars.enter().append("div") // <-C
+                .attr("class", "h-bar")
+                .style("background-color", function(d){
+                    return colorScale((d.baseDriver - d.min)/(d.max - d.min)*100);
+                })
+                .append("span");
+        // Update
+        d3.selectAll("div.h-bar") // <-D
+                .style("width", function (d) {
+                    return (d.baseDriver * 10) + "px";
+                })
+                .select("span")
+                .text(function (d) {
+//                     return d.compType;
+                    return d.category;
+                });
+        // Sort
+        if(comparator)
+            bars.sort(comparator); // <-E
+    }
+
+    var compareByValue = function (a, b) {  // <-F
+        return a.baseDriver < b.baseDriver?-1:1;
+    };
+    var compareByCategory = function (a, b) {  // <-G
+        return a.category < b.category?-1:1;
+};
+
+    render(data);
+
+    function sort(comparator) {
+        render(data, comparator);
+    }
+</script>
+
+<div class="control-group">
+    <button onclick="sort(compareByValue)">
+        Sort by Amount
+    </button>
+    <button onclick="sort(compareByCategory)">
+        Sort by Comp Type
+    </button>
+    <button onclick="sort()">
+        Reset
+    </button>
+</div>
+</body>

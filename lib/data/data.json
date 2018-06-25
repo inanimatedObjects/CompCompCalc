@@ -16,13 +16,12 @@
   {"unit": "hours/week", "compType": "timeAllocation", "min": 10, "baseDriver": 32, "max": 80, "normalizeFn": 40, "category": "Availability", "recurring": true, "guaranteed": false, "percentRealization": 80},
 
   {"unit": "weeks/year", "compType": "vacation", "min": 2, "baseDriver": 4, "max": 6, "normalizeFn": 52, "category": "Availability", "recurring": true, "guaranteed": true, "percentRealization": 100},
-  {"unit": "weeks/year", "compType": "newParent", "min": 0, "baseDriver": 0, "max": 8, "normalizeFn": 52, "category": "Availability", "recurring": false, "guaranteed": true, "percentRealization": 100},
+  {"unit": "weeks/year", "compType": "newParent", "min": 0, "baseDriver": 0, "max": 8, "normalizeFn": 52, "category": "Availability", "recurring": false, "guaranteed": true, "percentRealization": 0},
 
-  {"unit": "stockOptions", "compType": "signingOptions", "min": 0, "baseDriver": 10, "max": 20, "normalizeFn": 1, "category": "Equity", "recurring": false, "guaranteed": false, "percentRealization": 25},
-  {"unit": "RSUs", "compType": "signingRSUs", "min": 0, "baseDriver": 0, "max": 25, "normalizeFn": 1, "category": "Equity", "recurring": false, "guaranteed": true, "percentRealization": 25},
+  {"unit": "stockOptions", "compType": "signingOptions", "min": 0, "baseDriver": 10, "max": 20, "normalizeFn": 0.25, "category": "Equity", "recurring": false, "guaranteed": false, "percentRealization": 100},
+  {"unit": "RSUs", "compType": "signingRSUs", "min": 0, "baseDriver": 10, "max": 25, "normalizeFn": 0.25, "category": "Equity", "recurring": false, "guaranteed": false, "percentRealization": 100},
 
-  {"unit": "stockOptions/year", "compType": "ESOP", "min": 10, "baseDriver": 15, "max": 30, "normalizeFn": 1, "category": "Equity", "recurring": true, "guaranteed": false, "percentRealization": 25},
-  {"unit": "RSUs/year", "compType": "ESOP", "min": 5, "baseDriver": 15, "max": 20, "normalizeFn": 1, "category": "Equity", "recurring": true, "guaranteed": true, "percentRealization": 25},
-
+  {"unit": "stockOptions/year", "compType": "ESOP", "min": 10, "baseDriver": 15, "max": 30, "normalizeFn": 0.25, "category": "Equity", "recurring": true, "guaranteed": true, "percentRealization": 50},
+  {"unit": "RSUs/year", "compType": "ESOP", "min": 5, "baseDriver": 15, "max": 20, "normalizeFn": 0.25, "category": "Equity", "recurring": true, "guaranteed": true, "percentRealization": 50}
 
 ]
