@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
+
+    #summary {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.0em;
+      font-variant: small-caps;
+      font-weight: 500;
+      text-align:center;
+      outline:none;
+      letter-spacing: 1.5px;
+      padding:10px 0px 0px 10px;
+      width:960px;
+      margin: 0 auto;
+    }
+
+    #inputSliders { font-family:sans-serif;outline:none;margin-top:100px}
+    .inputgroup {border:none;}
+    .slider { width:200px;float:left;padding:10px;}
+    label { float:left;font-weight:bold;padding-bottom:10px;}
+    input[type=range] { float:left;clear:left;margin-right:10px;width:120px;}
+    input[type=range]::-ms-track { background: transparent;border-color: transparent;color: transparent;-webkit-appearance: none}
+    input[type=range]::-webkit-slider-runnable-track { height: 5px;background:#7c7c7c; margin-top: -4px;}
+    input[type=range]::-webkit-slider-thumb { margin-top:-6px;}
+    #inputSliders p {padding-top:10px;}
+    #airtemp {background-color:#fefcdc}
+    #radtemp {background-color:#ffd7bc}
+    #velocity {background-color:#cce1ee}
+    #humidity {background-color:#c2e5a8}
+    .slider2 {
+      width:234px;
+      float:left;
+      padding:14px 0px 1px 0px;
+    }
+
+    #basediv {background-color:#f2f2f2}
+    #incentivediv {background-color:#e6e6e6}
+    #benefitsdiv {background-color:#f2f2f2}
+    #equitydiv {background-color:#e6e6e6}
+    #educationdiv {background-color:#f2f2f2}
+    #timediv {background-color:#e6e6e6}
+  </style>
+
+</head>
+<body>
+
+<!-- ====================== DOM elements ======================== -->
+  <!-- summary figures bar -->
+  <div id="summary">
+    <div class="slider2" id="basediv">
+      <div id="base"></div>
+      <p style="margin-top:3px;">Base<br>Comp</p>
+    </div>
+
+    <div class="slider2" id="incentivediv">
+      <div id="incentive"></div>
+      <p style="margin-top:3px;">Incentive<br>Comp</p>
+    </div>
+
+    <div class="slider2" id="benefitsdiv">
+      <div id="benefits"></div>
+      <p style="margin-top:3px;">Benefits<br>Value Estimate</p>
+    </div>
+
+    <div class="slider2" id="equitydiv">
+      <div id="equity"></div>
+      <p style="margin-top:3px;">Equity<br>Comp</p>
+    </div>
+  </div>
+
+    <div class="slider2" id="educationdiv">
+      <div id="education"></div>
+      <p style="margin-top:3px;">Self-development<br>Education Reimbursement</p>
+    </div>
+  </div>
+
+    <div class="slider2" id="timediv">
+      <div id="availability"></div>
+      <p style="margin-top:3px;">Time Commitment<br>Time-Value Estimate</p>
+    </div>
+  </div>
+
+
+
+  <div id="inputSliders">
+		<form id="sliders" autocomplete="off">
+			<fieldset class="inputgroup">
+        <div class="slider" id="airtemp">
+				<label>Air Temperature</label>
+				<input type="range" name="ta" id="ta" value="20" min="0" max="30" step = "0.5"><p id="taoutput">20 C</p></div>
+        <div class="slider" id="radtemp">
+        <label>MRT</label>
+				<input type="range" name="tmrt" id="tmrt" value="20" min="0" max="30" step = "0.5"><p id="tmrtoutput">20 C</p>		</div>
+        <div class="slider" id="velocity">
+        <label>Wind Velocity</label>
+				<input type="range" name="vel" id="vel" value="1" min="0" max="10" step = "0.1"><p id="veloutput">1 m/s</p>				</div>
+        <div class="slider" id="humidity">
+        <label>Relative Humidity</label>
+				<input type="range" name="rh" id="rh" value="50" min="0" max="100"  step = "1"><p id="rhoutput">50 %</p></div>
+			</fieldset>
+		</form>
+	</div>
+
+
+
+<script>
+
+
+// ============ update the summary metrics at the top ==========
+  d3.selectAll(".resultText").remove();
+
+// Calculate the metrics
+  const EUI1 = 10;
+  const EUI2 = precisionRound(siteEUIData.reduce(add, 0),1);
+
+  d3.select("#base").append("text")
+    .attr("class", "resultText")
+    .attr("text-anchor", "start")
+    .attr("fill", "#000")
+    .style('font-size', '30px')
+    .style('font-family', 'sans-serif')
+    .text(EUI1.toString());
+  d3.select("#incentive").append("text")
+    .attr("class", "resultText")
+    .attr("text-anchor", "start")
+    .attr("fill", "#000")
+    .style('font-size', '30px')
+    .style('font-family', 'sans-serif')
+    .text(EUI2.toString());
+  d3.select("#benefits").append("text")
+    .attr("class", "resultText")
+    .attr("text-anchor", "start")
+    .attr("fill", "#000")
+    .style('font-size', '30px')
+    .style('font-family', 'sans-serif')
+    .text(precisionRound(peakData[0],1).toString());
+  d3.select("#equity").append("text")
+    .attr("class", "resultText")
+    .attr("text-anchor", "start")
+    .attr("fill", "#000")
+    .style('font-size', '30px')
+    .style('font-family', 'sans-serif')
+    .text(precisionRound(peakData[0],1).toString());
+
+  d3.select("#education").append("text")
+  .attr("class", "resultText")
+  .attr("text-anchor", "start")
+  .attr("fill", "#000")
+  .style('font-size', '30px')
+  .style('font-family', 'sans-serif')
+  .text(precisionRound(peakData[1],1).toString());
+
+
+  d3.select("#availability").append("text")
+    .attr("class", "resultText")
+    .attr("text-anchor", "start")
+    .attr("fill", "#000")
+    .style('font-size', '30px')
+    .style('font-family', 'sans-serif')
+    .text(precisionRound(peakData[0],1).toString());
+
+
+}
+
+
+// ============= function to update data driving the charts ===================
+    updateComp = function(){
+
+    }
+
+
+
+// ============= call update ================
+    updateComp()
+
+// ============= set frame dimensions ================
+    d3.select(self.frameElement).style("height", 800 + "px");
+</script>
+
+</body>
