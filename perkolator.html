@@ -3,7 +3,20 @@
   <meta charset="utf-8">
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <style>
-    body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
+
+    body {
+      margin:0;
+      position: relative;
+      top:0;
+      right:0;
+      bottom:0;
+      left:0;
+      /* background-color: #374034;
+      background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); */
+      background-color: #def7dc;
+      background-image: url("https://www.transparenttextures.com/patterns/black-linen.png");
+      opacity: 0.6;
+    }
 
     #summary {
       font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -11,38 +24,124 @@
       font-variant: small-caps;
       font-weight: 500;
       text-align:center;
-      outline:none;
+      outline:inherit;
       letter-spacing: 1.5px;
-      padding:10px 0px 0px 10px;
-      width:960px;
-      margin: 0 auto;
+      padding: 20px 0px 0px 20px;
+      width:auto;
+      margin: auto;
+      display: flex;
     }
 
-    #inputSliders { font-family:sans-serif;outline:none;margin-top:100px}
-    .inputgroup {border:none;}
-    .slider { width:200px;float:left;padding:10px;}
-    label { float:left;font-weight:bold;padding-bottom:10px;}
-    input[type=range] { float:left;clear:left;margin-right:10px;width:120px;}
-    input[type=range]::-ms-track { background: transparent;border-color: transparent;color: transparent;-webkit-appearance: none}
-    input[type=range]::-webkit-slider-runnable-track { height: 5px;background:#7c7c7c; margin-top: -4px;}
-    input[type=range]::-webkit-slider-thumb { margin-top:-6px;}
-    #inputSliders p {padding-top:10px;}
-    #airtemp {background-color:#fefcdc}
-    #radtemp {background-color:#ffd7bc}
-    #velocity {background-color:#cce1ee}
-    #humidity {background-color:#c2e5a8}
+    #content {
+      width:auto;
+      height: 200px;
+      /* position: relative; */
+      display: flex;
+      text-align:center;
+      margin: 30px;
+      padding: 0px;
+      border: 5px double red;
+    }
+
+    #inputSliders {
+      font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.0em;
+      font-variant: small-caps;
+      font-weight: 200;
+      display: inline-flex;
+      text-align:center;
+      outline: none;
+      padding: 20px;
+      width: auto;
+      margin: 2px;
+      margin-top: 0px;
+    }
+
+    /* .inputgroup {border:none;} */
+
+    .inputgroup {
+      border: 3px double cornflowerblue;
+      /* border:none; */
+      /* display: flex;
+      flex-wrap: nowrap; */
+    }
+
+    .slider {
+      width:auto;
+      height:inherit;
+      /* float: left; */
+      display: inline-block;
+      flex-direction: column;
+      flex-wrap: initial;
+      padding:25px;
+    }
+
     .slider2 {
-      width:234px;
+      width:200px;
       float:left;
-      padding:14px 0px 1px 0px;
+      margin: 3px;
+      padding: 10px;
     }
 
-    #basediv {background-color:#f2f2f2}
-    #incentivediv {background-color:#e6e6e6}
-    #benefitsdiv {background-color:#f2f2f2}
+    label {
+      font-size: 1.3em;
+      float: inherit;
+      font-weight:bold;
+      text-align:center;
+      padding: 0px 0px 0px 0px;
+    }
+
+    input[type=range] {
+      float:left;
+      clear:left;
+      margin-right:0px;
+      width:150px;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track { height: 3px;background:#7c7c7c; margin-top: -2px;}
+    input[type=range]::-webkit-slider-thumb { margin-top:-6px;}
+
+    /* input[type=range]::-ms-track { background: transparent;border-color: transparent;color: transparent;-webkit-appearance: none} */
+
+
+    #inputSliders p {
+      padding-top:1px;
+      font-size: 0.8em;
+    }
+
+
+    #signingbonus {background-color:#cce1ee}
+    #salary {background-color:#fefcdc}
+    #annualbonus {background-color:#ffd7bc}
+
+    #signingequity {background-color:#cce1ee}
+    #earnedequity {
+      color: white;
+      font-weight: 100;
+      background-color: #6b786c;
+      background-image: url("https://www.transparenttextures.com/patterns/black-orchid.png");
+    }
+
+    #match401k {background-color:#c2e5a8}
+    #healthinsurance {background-color: #38a8b7}
+    #expenses {background-color:#fefcdc}
+    #subsidies {background-color:#c2e5a8}
+
+    #vacation {background-color:#ffd7bc}
+    #workload {
+      background-color:black;
+      color: white;
+    }
+
+
+
+    /* #basediv {background-color:#f2f2f2} */
+    /* #incentivediv {background-color:#e6e6e6}
     #equitydiv {background-color:#e6e6e6}
-    #educationdiv {background-color:#f2f2f2}
-    #timediv {background-color:#e6e6e6}
+    #timediv {background-color:#f2f2f2}
+    #benefitsdiv {background-color:#f2f2f2}
+    #skillsetdiv {background-color:#e6e6e6} */
+
   </style>
 
 </head>
@@ -53,54 +152,123 @@
   <div id="summary">
     <div class="slider2" id="basediv">
       <div id="base"></div>
-      <p style="margin-top:3px;">Base<br>Comp</p>
+      <p>Base<br>Comp</p>
     </div>
 
     <div class="slider2" id="incentivediv">
       <div id="incentive"></div>
-      <p style="margin-top:3px;">Incentive<br>Comp</p>
-    </div>
-
-    <div class="slider2" id="benefitsdiv">
-      <div id="benefits"></div>
-      <p style="margin-top:3px;">Benefits<br>Value Estimate</p>
+      <p>Incentive<br>Comp</p>
     </div>
 
     <div class="slider2" id="equitydiv">
       <div id="equity"></div>
-      <p style="margin-top:3px;">Equity<br>Comp</p>
+      <p>Equity<br>Comp</p>
+    </div>
+
+    <div class="slider2" id="timediv">
+      <div id="timereq"></div>
+      <p>Time<br>Utilization</p>
+    </div>
+
+    <div class="slider2" id="benefitsdiv">
+      <div id="benefits"></div>
+      <p>Market Value<br>of Benefits</p>
+    </div>
+
+    <div class="slider2" id="skillsetdiv">
+      <div id="skillset"></div>
+      <p>Skillset<br>Development</p>
     </div>
   </div>
 
-    <div class="slider2" id="educationdiv">
-      <div id="education"></div>
-      <p style="margin-top:3px;">Self-development<br>Education Reimbursement</p>
-    </div>
-  </div>
 
-    <div class="slider2" id="timediv">
-      <div id="availability"></div>
-      <p style="margin-top:3px;">Time Commitment<br>Time-Value Estimate</p>
-    </div>
+  <!-- stacked bar charts -->
+  <div id="content">
   </div>
 
 
-
+  <!-- input sliders -->
   <div id="inputSliders">
 		<form id="sliders" autocomplete="off">
 			<fieldset class="inputgroup">
-        <div class="slider" id="airtemp">
-				<label>Air Temperature</label>
-				<input type="range" name="ta" id="ta" value="20" min="0" max="30" step = "0.5"><p id="taoutput">20 C</p></div>
-        <div class="slider" id="radtemp">
-        <label>MRT</label>
-				<input type="range" name="tmrt" id="tmrt" value="20" min="0" max="30" step = "0.5"><p id="tmrtoutput">20 C</p>		</div>
-        <div class="slider" id="velocity">
-        <label>Wind Velocity</label>
-				<input type="range" name="vel" id="vel" value="1" min="0" max="10" step = "0.1"><p id="veloutput">1 m/s</p>				</div>
-        <div class="slider" id="humidity">
-        <label>Relative Humidity</label>
-				<input type="range" name="rh" id="rh" value="50" min="0" max="100"  step = "1"><p id="rhoutput">50 %</p></div>
+
+        <!-- benefits -->
+        <div class="slider" id="signingbonus">
+          <label>signing bonus</label>
+          <p id="signingbonusoutput">$<br>single payment</p>
+          <input type="range" name="signBonus" id="signBonus" value="5" min="0" max="15" step = "1">
+        </div>
+
+        <!-- cash salary -->
+        <div class="slider" id="salary">
+          <label>base salary</label>
+          <p id="salaryoutput">$ / year<br>in bi-weekly paycheck</p>
+				  <input type="range" name="salary" id="salary" value="100" min="80" max="160"  step = "1">
+        </div>
+
+
+        <!-- professional development -->
+        <div class="slider" id="annualbonus">
+          <label>performance bonus</label>
+          <p id="bonusoutput">% <br>of base salary</p>
+          <input type="range" name="bonus" id="bonus" value="20" min="0" max="50" step = "1">
+        </div>
+
+        <!-- signing equity -->
+        <div class="slider" id="signingequity">
+          <label>signing equity</label>
+          <p id="signEquityOutput">$<br>present value</p>
+          <input type="range" name="signEquity" id="signEquity" value="0.5" min="0.1" max="0.50"  step = "0.2">
+        </div>
+
+        <!-- earned equity -->
+        <div class="slider" id="earnedequity">
+          <label>Earned Equity</label>
+          <p id="equityOutput">$<br>present value</p>
+          <input type="range" name="equity" id="equity" value="0.5" min="0.1" max="0.50"  step = "0.2">
+        </div>
+
+        <!-- equity salary -->
+        <div class="slider" id="match401k">
+          <label>401k matching</label>
+          <p id="matchoutput">% salary contributed<br>to retirement-savings</p>
+          <input type="range" name="match" id="match" value="5" min="0" max="6"  step = "1">
+        </div>
+
+        <!-- health insurance -->
+        <div class="slider" id="healthinsurance">
+          <label>Health Insurance</label>
+          <p id="rvaloutput">$ / month <br>employer-paid</p>
+					<input type="range" name="health" id="health" value="0" min="0" max="1"  step = "1">
+        </div>
+
+        <!-- expense account -->
+        <div class="slider" id="expenses">
+          <label>Expense Account</label>
+          <p id="reimbursementoutput">$ / month<br>reimbursable costs</p>
+					<input type="range" name="reimburse" id="reimburse" value="10" min="0" max="20"  step = "5">
+        </div>
+
+        <!-- 401k match -->
+        <div class="slider" id="subsidies">
+          <label>Monthly Subsidies</label>
+          <p id="subsidyoutput">$ / month<br>in bi-weekly paycheck</p>
+					<input type="range" name="subsidy" id="subsidy" value="1" min="0" max="2"  step = "0.25">
+        </div>
+
+        <!-- personal development -->
+        <div class="slider" id="vacation">
+          <label>Vacation</label>
+          <p id="vacationoutput">weeks / year<br>paid time off</p>
+					<input type="range" name="pto" id="pto" value="2" min="0" max="6"  step = "1">
+        </div>
+
+        <!-- health insurance -->
+        <div class="slider" id="workload">
+          <label>Expected Workload</label>
+          <p id="workloadoutput">hours / week<br>estimated workload</p>
+					<input type="range" name="time" id="time" value="40" min="20" max="60"  step = "1">
+        </div>
 			</fieldset>
 		</form>
 	</div>
@@ -114,57 +282,60 @@
   d3.selectAll(".resultText").remove();
 
 // Calculate the metrics
-  const EUI1 = 10;
-  const EUI2 = precisionRound(siteEUIData.reduce(add, 0),1);
+  const EUI1 = 100;
+  const EUI2 = 200;
 
   d3.select("#base").append("text")
     .attr("class", "resultText")
     .attr("text-anchor", "start")
-    .attr("fill", "#000")
+    .attr("fill", "pink")
     .style('font-size', '30px')
     .style('font-family', 'sans-serif')
-    .text(EUI1.toString());
+    .text((1).toString());
+
   d3.select("#incentive").append("text")
     .attr("class", "resultText")
     .attr("text-anchor", "start")
     .attr("fill", "#000")
     .style('font-size', '30px')
     .style('font-family', 'sans-serif')
-    .text(EUI2.toString());
+    .text((1).toString());
+
+    d3.select("#equity").append("text")
+    .attr("class", "resultText")
+    .attr("text-anchor", "start")
+    .attr("fill", "#000")
+    .style('font-size', '30px')
+    .style('font-family', 'sans-serif')
+    .text((1).toString());
+
+    d3.select("#timereq").append("text")
+    .attr("class", "resultText")
+    .attr("text-anchor", "start")
+    .attr("fill", "#000")
+    .style('font-size', '30px')
+    .style('font-family', 'sans-serif')
+    .text((1).toString());
+
   d3.select("#benefits").append("text")
     .attr("class", "resultText")
     .attr("text-anchor", "start")
     .attr("fill", "#000")
     .style('font-size', '30px')
     .style('font-family', 'sans-serif')
-    .text(precisionRound(peakData[0],1).toString());
-  d3.select("#equity").append("text")
-    .attr("class", "resultText")
-    .attr("text-anchor", "start")
-    .attr("fill", "#000")
-    .style('font-size', '30px')
-    .style('font-family', 'sans-serif')
-    .text(precisionRound(peakData[0],1).toString());
+    .text((1).toString());
 
-  d3.select("#education").append("text")
+  d3.select("#skillset").append("text")
   .attr("class", "resultText")
   .attr("text-anchor", "start")
   .attr("fill", "#000")
   .style('font-size', '30px')
   .style('font-family', 'sans-serif')
-  .text(precisionRound(peakData[1],1).toString());
+  .text((1).toString());
 
 
-  d3.select("#availability").append("text")
-    .attr("class", "resultText")
-    .attr("text-anchor", "start")
-    .attr("fill", "#000")
-    .style('font-size', '30px')
-    .style('font-family', 'sans-serif')
-    .text(precisionRound(peakData[0],1).toString());
 
 
-}
 
 
 // ============= function to update data driving the charts ===================
