@@ -79,6 +79,8 @@
     .slider2 {
       width:200px;
       float:left;
+      background-color: black;
+      color: white;
       margin: 3px;
       padding: 10px;
     }
@@ -276,7 +278,34 @@
 
 
 <script>
+// ====================== load data ========================
+var data = [
+  {"unit": "$/year", "compType": "salary", "min": 80, "val": 130, "max": 150, "normalizeFn": 1, "category": "base", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$/year", "compType": "match401k", "min": 0, "val": 5, "max": 6, "normalizeFn": 1, "category": "base", "recurring": true, "guaranteed": true, "percentRealization": 50},
 
+  {"unit": "$", "compType": "signingBonus", "min": 5, "val": 8, "max": 12, "normalizeFn": 1, "category": "Incentive", "recurring": false, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$", "compType": "annualBonus", "min": 10, "val": 25, "max": 50, "normalizeFn": 1, "category": "Incentive", "recurring": true, "guaranteed": false, "percentRealization": 50},
+
+  {"unit": "$/month", "compType": "employerPaidHealth", "min": 0.4, "val": 1.5, "max": 2.2, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$/month", "compType": "stipends", "min": 0, "val": 1.5, "max": 3, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": false, "percentRealization": 100},
+  {"unit": "$/month", "compType": "subsidies", "min": 0, "val": 1, "max": 2, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$/month", "compType": "misc", "min": 0, "val": 0.01, "max": 5, "normalizeFn": 12, "category": "Benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+
+  {"unit": "$/year", "compType": "professionalDev", "min": 0, "val": 1.5, "max": 2.0, "normalizeFn": 1, "category": "Education", "recurring": true, "guaranteed": true, "percentRealization": 70},
+  {"unit": "$/year", "compType": "personalDev", "min": 0, "val": 0.5, "max": 0.5, "normalizeFn": 1, "category": "Education", "recurring": true, "guaranteed": true, "percentRealization": 90},
+
+  {"unit": "hours/week", "compType": "timeAllocation", "min": 10, "val": 32, "max": 80, "normalizeFn": 40, "category": "Availability", "recurring": true, "guaranteed": false, "percentRealization": 80},
+
+  {"unit": "weeks/year", "compType": "vacation", "min": 2, "val": 4, "max": 6, "normalizeFn": 52, "category": "Availability", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "weeks/year", "compType": "newParent", "min": 0, "val": 0.01, "max": 8, "normalizeFn": 52, "category": "Availability", "recurring": false, "guaranteed": true, "percentRealization": 0},
+
+  {"unit": "stockOptions", "compType": "signingOptions", "min": 0, "val": 10, "max": 20, "normalizeFn": 0.25, "category": "Equity", "recurring": false, "guaranteed": false, "percentRealization": 100},
+  {"unit": "RSUs", "compType": "signingRSUs", "min": 0, "val": 10, "max": 25, "normalizeFn": 0.25, "category": "Equity", "recurring": false, "guaranteed": false, "percentRealization": 100},
+
+  {"unit": "stockOptions/year", "compType": "ESOP", "min": 10, "val": 15, "max": 30, "normalizeFn": 0.25, "category": "Equity", "recurring": true, "guaranteed": true, "percentRealization": 50},
+  {"unit": "RSUs/year", "compType": "ESOP", "min": 5, "val": 15, "max": 20, "normalizeFn": 0.25, "category": "Equity", "recurring": true, "guaranteed": true, "percentRealization": 50}
+
+];
 
 // ============ update the summary metrics at the top ==========
   d3.selectAll(".resultText").remove();
