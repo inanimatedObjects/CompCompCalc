@@ -2,77 +2,77 @@
   {
     "base" : {
       "salary" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
       },
-      "total":
+      "total": 80000
     },
 
     "incentive" : {
       "signBonus" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
       },
       "perfBonus" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
       },
-      "total" :
+      "total" : 20000
     },
 
     "equity" : {
       "signEq" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
       },
       "earnedEq" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
       },
-      "total" :
+      "total" : 30000
     },
 
     "benefits" : {
       "paidHealth" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
       },
       "expenseAcct" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
       },
       "subsidies" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
       },
       "401k" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
       },
-      "total" :
+      "total" : 10000
     },
 
     "availability" : {
       "vacation" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
       },
       "workload" : {
-        "max" : ,
-        "min" : ,
-        "val" :
+        "max" : 60,
+        "min" : 20,
+        "val" : 40
       },
-      "total" :
+      "total" : 8000
     }
 
   }
