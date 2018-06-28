@@ -271,6 +271,12 @@
 
 
 // ====================== update inputs ========================
+    $("#hsource").on("input", function(event) {
+      hSource = $(this).val();
+      $("#hsourceoutput").text(hSourceDict[hSource]);
+      updateEnergy();
+    });
+    
     $("#cashSal").on("input", function(event) {
       CashSal = $(this).val();
       $("#cashSaloutput").text(labVentDict[Vent]);
@@ -325,11 +331,6 @@
       updateEnergy();
     });
 
-    $("#hsource").on("input", function(event) {
-      hSource = $(this).val();
-      $("#hsourceoutput").text(hSourceDict[hSource]);
-      updateEnergy();
-    });
 
 
 // ============= function to update data driving the charts ===================

@@ -51,11 +51,29 @@
       display: inline-flex;
       text-align:center;
       outline: none;
-      padding: 20px;
+      padding: 0px;
       width: auto;
-      margin: 2px;
+      margin: 0px;
       margin-top: 0px;
     }
+
+    #inputSliders span {
+      margin-top: 0px;
+      font-size: 1.3em;
+    }
+
+    #inputSliders label {
+      margin-top: -5px;
+      padding-top: -5px;
+      font-size: 1.0em;
+    }
+
+    #inputSliders p {
+      padding-top: 0px;
+      font-size: 0.8em;
+    }
+
+
 
     /* .inputgroup {border:none;} */
 
@@ -73,7 +91,7 @@
       display: inline-block;
       flex-direction: column;
       flex-wrap: initial;
-      padding:25px;
+      padding:20px;
     }
 
     .slider2 {
@@ -106,12 +124,6 @@
     /* input[type=range]::-ms-track { background: transparent;border-color: transparent;color: transparent;-webkit-appearance: none} */
 
 
-    #inputSliders p {
-      padding-top:1px;
-      font-size: 0.8em;
-    }
-
-
     #signingbonus {background-color:#cce1ee}
     #salary {background-color:#fefcdc}
     #annualbonus {background-color:#ffd7bc}
@@ -136,7 +148,16 @@
     }
 
 
-
+    .h-bar {
+        min-height: 15px;
+        min-width: 10px;
+        background-color: steelblue;
+        margin-bottom: 2px;
+        font-size: 11px;
+        color: pink;
+        text-align: right;
+        padding-right: 2px;
+    }
     /* #basediv {background-color:#f2f2f2} */
     /* #incentivediv {background-color:#e6e6e6}
     #equitydiv {background-color:#e6e6e6}
@@ -198,14 +219,14 @@
         <div class="slider" id="signingbonus">
           <label>signing bonus</label>
           <p id="signingbonusoutput">$<br>single payment</p>
-          <input type="range" name="signBonus" id="signBonus" value="5" min="0" max="15" step = "1">
+          <input type="range" name="signBonus" id="signBonus" val="5" min="0" max="15" step = "1">
         </div>
 
         <!-- cash salary -->
         <div class="slider" id="salary">
           <label>base salary</label>
           <p id="salaryoutput">$ / year<br>in bi-weekly paycheck</p>
-				  <input type="range" name="salary" id="salary" value="100" min="80" max="160"  step = "1">
+				  <input type="range" name="salary" id="salary" val="100" min="80" max="160"  step = "1">
         </div>
 
 
@@ -213,63 +234,70 @@
         <div class="slider" id="annualbonus">
           <label>performance bonus</label>
           <p id="bonusoutput">% <br>of base salary</p>
-          <input type="range" name="bonus" id="bonus" value="20" min="0" max="50" step = "1">
+          <input type="range" name="bonus" id="bonus" val="20" min="0" max="50" step = "1">
         </div>
 
         <!-- signing equity -->
         <div class="slider" id="signingequity">
           <label>signing equity</label>
-          <p id="signEquityOutput">$<br>present value</p>
-          <input type="range" name="signEquity" id="signEquity" value="0.5" min="0.1" max="0.50"  step = "0.2">
+          <p id="signEquityOutput">$<br>present val</p>
+          <input type="range" name="signEquity" id="signEquity" val="0.5" min="0.1" max="0.50"  step = "0.2">
         </div>
 
         <!-- earned equity -->
         <div class="slider" id="earnedequity">
           <label>Earned Equity</label>
-          <p id="equityOutput">$<br>present value</p>
-          <input type="range" name="equity" id="equity" value="0.5" min="0.1" max="0.50"  step = "0.2">
+          <p id="equityOutput">$<br>present val</p>
+          <input type="range" name="equity" id="equity" val="0.5" min="0.1" max="0.50"  step = "0.2">
         </div>
 
         <!-- equity salary -->
         <div class="slider" id="match401k">
           <label>401k matching</label>
           <p id="matchoutput">% salary contributed<br>to retirement-savings</p>
-          <input type="range" name="match" id="match" value="5" min="0" max="6"  step = "1">
+          <input type="range" name="match" id="match" val="5" min="0" max="6"  step = "1">
         </div>
 
         <!-- health insurance -->
         <div class="slider" id="healthinsurance">
           <label>Health Insurance</label>
           <p id="rvaloutput">$ / month <br>employer-paid</p>
-					<input type="range" name="health" id="health" value="0" min="0" max="1"  step = "1">
+					<input type="range" name="health" id="health" val="0" min="0" max="1"  step = "1">
         </div>
 
         <!-- expense account -->
         <div class="slider" id="expenses">
           <label>Expense Account</label>
           <p id="reimbursementoutput">$ / month<br>reimbursable costs</p>
-					<input type="range" name="reimburse" id="reimburse" value="10" min="0" max="20"  step = "5">
+					<input type="range" name="reimburse" id="reimburse" val="10" min="0" max="20"  step = "5">
         </div>
 
         <!-- 401k match -->
         <div class="slider" id="subsidies">
           <label>Monthly Subsidies</label>
           <p id="subsidyoutput">$ / month<br>in bi-weekly paycheck</p>
-					<input type="range" name="subsidy" id="subsidy" value="1" min="0" max="2"  step = "0.25">
+					<input type="range" name="subsidy" id="subsidy" val="1" min="0" max="2"  step = "0.25">
         </div>
 
         <!-- personal development -->
         <div class="slider" id="vacation">
           <label>Vacation</label>
           <p id="vacationoutput">weeks / year<br>paid time off</p>
-					<input type="range" name="pto" id="pto" value="2" min="0" max="6"  step = "1">
+					<input type="range" name="pto" id="pto" val="2" min="0" max="6"  step = "1">
         </div>
 
         <!-- health insurance -->
         <div class="slider" id="workload">
-          <label>Expected Workload</label>
-          <p id="workloadoutput">hours / week<br>estimated workload</p>
-					<input type="range" name="time" id="time" value="40" min="20" max="60"  step = "1">
+          <label>Weekly Workload</label>
+          <br>
+          <br>
+          <!-- <svg width="200" height="100">
+            <g id="workloadoutput">  !=not rendering properly =! </p>
+          </svg> -->
+
+          <p>hours / week<br>to reach expected utilization</p>
+					<input type="range" name="workload" id="workload" val="10" min="0" max="80"  step = "1">
+            <p id="workloadoutput">Silver</p>
         </div>
 			</fieldset>
 		</form>
@@ -279,8 +307,15 @@
 
 <script>
 // ====================== load data ========================
+
+// let data = d3.json("./lib/data/data.json", function(error, json){
+//       render(json);
+//   });
+
 var data = [
-  {"unit": "$/year", "compType": "salary", "min": 80, "val": 130, "max": 150, "normalizeFn": 1, "category": "base", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "hours/week", "compType": "timeAllocation", "min": 10, "val": 32, "max": 80, "normalizeFn": 40, "category": "Availability", "recurring": true, "guaranteed": false, "percentRealization": 80},
+
+  {"unit": "$/year", "compType": "salary", "min": 80, "val": 120, "max": 150, "normalizeFn": 1, "category": "base", "recurring": true, "guaranteed": true, "percentRealization": 100},
   {"unit": "$/year", "compType": "match401k", "min": 0, "val": 5, "max": 6, "normalizeFn": 1, "category": "base", "recurring": true, "guaranteed": true, "percentRealization": 50},
 
   {"unit": "$", "compType": "signingBonus", "min": 5, "val": 8, "max": 12, "normalizeFn": 1, "category": "Incentive", "recurring": false, "guaranteed": true, "percentRealization": 100},
@@ -294,7 +329,6 @@ var data = [
   {"unit": "$/year", "compType": "professionalDev", "min": 0, "val": 1.5, "max": 2.0, "normalizeFn": 1, "category": "Education", "recurring": true, "guaranteed": true, "percentRealization": 70},
   {"unit": "$/year", "compType": "personalDev", "min": 0, "val": 0.5, "max": 0.5, "normalizeFn": 1, "category": "Education", "recurring": true, "guaranteed": true, "percentRealization": 90},
 
-  {"unit": "hours/week", "compType": "timeAllocation", "min": 10, "val": 32, "max": 80, "normalizeFn": 40, "category": "Availability", "recurring": true, "guaranteed": false, "percentRealization": 80},
 
   {"unit": "weeks/year", "compType": "vacation", "min": 2, "val": 4, "max": 6, "normalizeFn": 52, "category": "Availability", "recurring": true, "guaranteed": true, "percentRealization": 100},
   {"unit": "weeks/year", "compType": "newParent", "min": 0, "val": 0.01, "max": 8, "normalizeFn": 52, "category": "Availability", "recurring": false, "guaranteed": true, "percentRealization": 0},
@@ -307,12 +341,31 @@ var data = [
 
 ];
 
+
+// ====================== get input values from sliders ========================
+
+let workload = $("#workload").val().toString(); // Hot Water Source
+
+
+
+// ============== assign input types & values for slider positions  ===============
+    workloadObj = {'0':'silver', '1':'gold'}
+
+
+// ====================== update inputs ========================
+$("#workload").on("input", function(event) {
+  Workload = $(this).val();
+  ("#workloadoutput").text(workloadObj[workload]);
+  updateComp();
+});
+
+
+
 // ============ update the summary metrics at the top ==========
-  d3.selectAll(".resultText").remove();
+  // d3.selectAll(".resultText").remove();
 
 // Calculate the metrics
-  const EUI1 = 100;
-  const EUI2 = 200;
+  // NOTE: SET & ASSIGN CONSTANTS
 
   d3.select("#base").append("text")
     .attr("class", "resultText")
@@ -363,19 +416,93 @@ var data = [
   .text((1).toString());
 
 
+  // d3.select("#workload").append("text")
+  // .attr("class", "currentVal")
+  // .attr("fill", "pink")
+  // .style('font-size', '30px')
+  // .style('font-family', 'sans-serif')
+  // .text(data[16].val.toString());
+
+
+  // ====================== get input values from sliders ========================
+  // var Workload = $("#workload").val().toString();
 
 
 
+ updateComp = function(){
+
+
+   render()
+ }
 
 // ============= function to update data driving the charts ===================
-    updateComp = function(){
 
-    }
+function render(data) {
+    // var bars = d3.select("body").selectAll("div.h-bar")
+    //         .data(data);
+
+    var bars = d3.select("body").selectAll("div.g")
+            .data(data);
+
+    bars.enter()
+      .append("div")
+        .attr("class", "g")
+    .merge(bars)
+      .text("g")
+            .text(function(d) {
+              return d.val;
+            });
+
+    bars.exit()
+      .remove();
+
+}
+
+
+// setInterval(function () { // <- L
+//      data.shift();
+//      data.push(Math.round(Math.random() * 100));
+//      render(data);
+//  }, 1500);
+ render(data);
+
+// function load(){
+//   d3.json("./lib/data/data.json", function(error, json){
+//         render(json);
+//     });
+//   }
+
+
+
+
+// ====================================
+    // updateComp = function(){
+
+      // Update the risk profile chart
+    // d3.selectAll('.currentVal').remove();
+    // for (i = 0; i < data.length; i++) {
+    //   d3.append("text")
+    //     .attr('fill', "pink")
+    //     .attr("class", "currentVal")
+    //     .style("stroke", "hsla(127, 100%, 7%, 0.88)")
+    //     .style("stroke-width", "0.15em");
+    //     // .text($(this).value.toString());
+    // }
+
+  //   d3.select("#workload").append("text")
+  //        	.attr("class", "resultText")
+  //          .attr("text-anchor", "start")
+  //          .attr("fill", "#000")
+  //      		.style('font-size', '30px')
+  //      		.style('font-family', 'sans-serif')
+  //          .text($(this).value.toString());
+  //
+  // }
 
 
 
 // ============= call update ================
-    updateComp()
+    // updateComp()
 
 // ============= set frame dimensions ================
     d3.select(self.frameElement).style("height", 800 + "px");

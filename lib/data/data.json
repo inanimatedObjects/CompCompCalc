@@ -1,28 +1,40 @@
 [
-  {"unit": "$/year", "id": "salary", "min": 100, "baseDriver": 150, "max": 200, "normalizeFn": 1, "category": "base", "recurring": true, "guaranteed": true, "percentRealization": 100},
-  {"unit": "$/year", "id": "match401k", "min": 0, "baseDriver": 5, "max": 6, "normalizeFn": 1, "category": "base", "recurring": true, "guaranteed": true, "percentRealization": 50},
+  {
+    "id": "salary",
+    "unit": "$/year",
+    "min": 100,
+    "val": 150,
+    "max": 200,
+    "normalizeFn": 1,
+    "category": "base",
+    "recurring": true,
+    "guaranteed": true,
+   "percentRealization": 100
+     },
 
-  {"unit": "$", "id": "signingBonus", "min": 5, "baseDriver": 8, "max": 12, "normalizeFn": 1, "category": "incentive", "recurring": false, "guaranteed": true, "percentRealization": 100},
-  {"unit": "$", "id": "performanceBonus", "min": 10, "baseDriver": 25, "max": 50, "normalizeFn": 1, "category": "incentive", "recurring": true, "guaranteed": false, "percentRealization": 50},
+  {"unit": "$/year", "id": "match401k", "min": 0, "val": 5, "max": 6, "normalizeFn": 1, "category": "base", "recurring": true, "guaranteed": true, "percentRealization": 50},
 
-  {"unit": "$/month", "id": "employerPaidHealth", "min": 0.4, "baseDriver": 1.5, "max": 2.2, "normalizeFn": 12, "category": "benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
-  {"unit": "$/month", "id": "reimbursements", "min": 0, "baseDriver": 1.5, "max": 3, "normalizeFn": 12, "category": "benefits", "recurring": true, "guaranteed": false, "percentRealization": 100},
-  {"unit": "$/month", "id": "subsidies", "min": 0, "baseDriver": 1, "max": 2, "normalizeFn": 12, "category": "benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
-  {"unit": "$/month", "id": "misc", "min": 0, "baseDriver": 0, "max": 5, "normalizeFn": 12, "category": "benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$", "id": "signingBonus", "min": 5, "val": 8, "max": 12, "normalizeFn": 1, "category": "incentive", "recurring": false, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$", "id": "performanceBonus", "min": 10, "val": 25, "max": 50, "normalizeFn": 1, "category": "incentive", "recurring": true, "guaranteed": false, "percentRealization": 50},
 
-  {"unit": "$/year", "id": "professionalDev", "min": 0, "baseDriver": 1.5, "max": 2.0, "normalizeFn": 1, "category": "education", "recurring": true, "guaranteed": true, "percentRealization": 70},
-  {"unit": "$/year", "id": "personalDev", "min": 0, "baseDriver": 0.5, "max": 0.5, "normalizeFn": 1, "category": "education", "recurring": true, "guaranteed": true, "percentRealization": 90},
+  {"unit": "$/month", "id": "employerPaidHealth", "min": 0.4, "val": 1.5, "max": 2.2, "normalizeFn": 12, "category": "benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$/month", "id": "reimbursements", "min": 0, "val": 1.5, "max": 3, "normalizeFn": 12, "category": "benefits", "recurring": true, "guaranteed": false, "percentRealization": 100},
+  {"unit": "$/month", "id": "subsidies", "min": 0, "val": 1, "max": 2, "normalizeFn": 12, "category": "benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "$/month", "id": "misc", "min": 0, "val": 0, "max": 5, "normalizeFn": 12, "category": "benefits", "recurring": true, "guaranteed": true, "percentRealization": 100},
 
-  {"unit": "hours/week", "id": "timeAllocation", "min": 10, "baseDriver": 32, "max": 80, "normalizeFn": 40, "category": "availability", "recurring": true, "guaranteed": false, "percentRealization": 80},
+  {"unit": "$/year", "id": "professionalDev", "min": 0, "val": 1.5, "max": 2.0, "normalizeFn": 1, "category": "education", "recurring": true, "guaranteed": true, "percentRealization": 70},
+  {"unit": "$/year", "id": "personalDev", "min": 0, "val": 0.5, "max": 0.5, "normalizeFn": 1, "category": "education", "recurring": true, "guaranteed": true, "percentRealization": 90},
 
-  {"unit": "weeks/year", "id": "vacation", "min": 2, "baseDriver": 4, "max": 6, "normalizeFn": 52, "category": "availability", "recurring": true, "guaranteed": true, "percentRealization": 100},
-  {"unit": "weeks/year", "id": "newParent", "min": 0, "baseDriver": 0, "max": 8, "normalizeFn": 52, "category": "availability", "recurring": false, "guaranteed": true, "percentRealization": 0},
+  {"unit": "hours/week", "id": "timeAllocation", "min": 10, "val": 32, "max": 80, "normalizeFn": 40, "category": "availability", "recurring": true, "guaranteed": false, "percentRealization": 80},
 
-  {"unit": "stockOptions", "id": "signingOptions", "min": 0, "baseDriver": 10, "max": 20, "normalizeFn": 0.25, "category": "equity", "recurring": false, "guaranteed": false, "percentRealization": 100},
-  {"unit": "RSUs", "id": "signingRSUs", "min": 0, "baseDriver": 10, "max": 25, "normalizeFn": 0.25, "category": "equity", "recurring": false, "guaranteed": false, "percentRealization": 100},
+  {"unit": "weeks/year", "id": "vacation", "min": 2, "val": 4, "max": 6, "normalizeFn": 52, "category": "availability", "recurring": true, "guaranteed": true, "percentRealization": 100},
+  {"unit": "weeks/year", "id": "newParent", "min": 0, "val": 0, "max": 8, "normalizeFn": 52, "category": "availability", "recurring": false, "guaranteed": true, "percentRealization": 0},
+
+  {"unit": "stockOptions", "id": "signingOptions", "min": 0, "val": 10, "max": 20, "normalizeFn": 0.25, "category": "equity", "recurring": false, "guaranteed": false, "percentRealization": 100},
+  {"unit": "RSUs", "id": "signingRSUs", "min": 0, "val": 10, "max": 25, "normalizeFn": 0.25, "category": "equity", "recurring": false, "guaranteed": false, "percentRealization": 100},
 
 
-  {"unit": "stockOptions/year", "id": "ESOP", "min": 10, "baseDriver": 15, "max": 30, "normalizeFn": 0.25, "category": "equity", "recurring": true, "guaranteed": true, "percentRealization": 50},
-  {"unit": "RSUs/year", "id": "RSU", "min": 5, "baseDriver": 15, "max": 20, "normalizeFn": 0.25, "category": "equity", "recurring": true, "guaranteed": true, "percentRealization": 50}
+  {"unit": "stockOptions/year", "id": "ESOP", "min": 10, "val": 15, "max": 30, "normalizeFn": 0.25, "category": "equity", "recurring": true, "guaranteed": true, "percentRealization": 50},
+  {"unit": "RSUs/year", "id": "RSU", "min": 5, "val": 15, "max": 20, "normalizeFn": 0.25, "category": "equity", "recurring": true, "guaranteed": true, "percentRealization": 50}
 
 ]
