@@ -1,0 +1,79 @@
+[
+  {
+    "base" : {
+      "salary" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "total":
+    },
+
+    "incentive" : {
+      "signBonus" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "perfBonus" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "total" :
+    },
+
+    "equity" : {
+      "signEq" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "earnedEq" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "total" :
+    },
+
+    "benefits" : {
+      "paidHealth" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "expenseAcct" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "subsidies" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "401k" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "total" :
+    },
+
+    "availability" : {
+      "vacation" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "workload" : {
+        "max" : ,
+        "min" : ,
+        "val" :
+      },
+      "total" :
+    }
+
+  }
+]
