@@ -2,15 +2,24 @@
   {
     "base" : {
       "salary" : {
+<<<<<<< HEAD
         "max" : ,
         "min" : ,
         "val" :
       },
       "total":
+=======
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
+      },
+      "total": 80000
+>>>>>>> 6440e243f7fe9e7510fab47b9310fcf943e04ac1
     },
 
     "incentive" : {
       "signBonus" : {
+<<<<<<< HEAD
         "max" : ,
         "min" : ,
         "val" :
@@ -21,10 +30,23 @@
         "val" :
       },
       "total" :
+=======
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
+      },
+      "perfBonus" : {
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
+      },
+      "total" : 20000
+>>>>>>> 6440e243f7fe9e7510fab47b9310fcf943e04ac1
     },
 
     "equity" : {
       "signEq" : {
+<<<<<<< HEAD
         "max" : ,
         "min" : ,
         "val" :
@@ -35,10 +57,23 @@
         "val" :
       },
       "total" :
+=======
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
+      },
+      "earnedEq" : {
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
+      },
+      "total" : 30000
+>>>>>>> 6440e243f7fe9e7510fab47b9310fcf943e04ac1
     },
 
     "benefits" : {
       "paidHealth" : {
+<<<<<<< HEAD
         "max" : ,
         "min" : ,
         "val" :
@@ -59,10 +94,33 @@
         "val" :
       },
       "total" :
+=======
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
+      },
+      "expenseAcct" : {
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
+      },
+      "subsidies" : {
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
+      },
+      "401k" : {
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
+      },
+      "total" : 10000
+>>>>>>> 6440e243f7fe9e7510fab47b9310fcf943e04ac1
     },
 
     "availability" : {
       "vacation" : {
+<<<<<<< HEAD
         "max" : ,
         "min" : ,
         "val" :
@@ -73,6 +131,18 @@
         "val" :
       },
       "total" :
+=======
+        "max" : 1,
+        "min" : 0,
+        "val" : 1
+      },
+      "workload" : {
+        "max" : 60,
+        "min" : 20,
+        "val" : 40
+      },
+      "total" : 8000
+>>>>>>> 6440e243f7fe9e7510fab47b9310fcf943e04ac1
     }
 
   }
