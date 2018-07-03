@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <style>
+
+    body {
+      margin:0;
+      position: relative;
+      top:0;
+      right:0;
+      bottom:0;
+      left:0;
+      /* background-color: #374034;
+      background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); */
+      background-color: gray;
+/*       background-image: url("https://www.transparenttextures.com/patterns/black-linen.png"); */
+      opacity: 0.6;
+    }
+
+
+    #inputSliders {
+      font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.0em;
+      font-variant: small-caps;
+      font-weight: 200;
+      display: inline-flex;
+      text-align:center;
+      outline: none;
+      padding: 0px;
+      width: auto;
+      margin: 0px;
+      margin-top: 0px;
+    }
+
+    #inputSliders span {
+      margin-top: 0px;
+      font-size: 1.3em;
+    }
+
+    #inputSliders label {
+      margin-top: -5px;
+      padding-top: -5px;
+      font-size: 1.0em;
+    }
+
+    #inputSliders p {
+      padding-top: 0px;
+      font-size: 0.8em;
+    }
+
+    .inputgroup {
+      border: 3px double cornflowerblue;
+      /* border:none; */
+      /* display: flex;
+      flex-wrap: nowrap; */
+    }
+
+    .slider {
+      width:auto;
+      height:inherit;
+      /* float: left; */
+      display: inline-block;
+      flex-direction: column;
+      flex-wrap: initial;
+      padding:20px;
+    }
+
+    .slider2 {
+      width:200px;
+      float:left;
+      background-color: black;
+      color: white;
+      margin: 3px;
+      padding: 10px;
+    }
+
+    label {
+      font-size: 1.3em;
+      float: inherit;
+      font-weight:bold;
+      text-align:center;
+      padding: 0px 0px 0px 0px;
+    }
+
+    input[type=range] {
+      float:left;
+      clear:left;
+      margin-right:0px;
+      width:150px;
+    }
+
+
+    .h-bar {
+        min-height: 15px;
+        min-width: 10px;
+        background-color: steelblue;
+        margin-bottom: 2px;
+        font-size: 11px;
+        color: pink;
+        text-align: right;
+        padding-right: 2px;
+    }
+
+
+    input[type=range]::-webkit-slider-runnable-track { height: 3px;background:#7c7c7c; margin-top: -2px;}
+    input[type=range]::-webkit-slider-thumb { margin-top:-6px;}
+    input[type=range]::-ms-track { background: transparent;border-color: transparent;color: transparent;-webkit-appearance: none}
+
+    #match401k {background-color:#c2e5a8}
+    #healthinsurance {background-color: #38a8b7}
+    #expenses {background-color:#fefcdc}
+    #subsidies {background-color:#c2e5a8}
+
+    #vacation {background-color:#ffd7bc}
+    #signingbonus {background-color:#cce1ee}
+    #salary {background-color:#fefcdc}
+    #annualbonus {background-color:#ffd7bc}
+
+    #signingequity {background-color:#cce1ee}
+    #earnedequity {
+      color: white;
+      font-weight: 100;
+      background-color: #909c91;
+/*       background-image: url("https://www.transparenttextures.com/patterns/black-orchid.png"); */
+    }
+    #workload {
+      background-color:black;
+      color: white;
+    }
+
+    /* #basediv {background-color:#f2f2f2} */
+    /* #incentivediv {background-color:#e6e6e6}
+    #equitydiv {background-color:#e6e6e6}
+    #timediv {background-color:#f2f2f2}
+    #benefitsdiv {background-color:#f2f2f2}
+    #skillsetdiv {background-color:#e6e6e6} */
+
+  </style>
+</head>
+<!--|~  #>  #&&&&&&#   &|& DOM OBJECT : summary figures bar &|&  &&============> #& -->
+<!--|~  #>  #&&&&&&#  &|& DOM OBJECT : stacked bar chart &|&  &&===============> #& -->
+<!--|~  #>  #&&&&&&#  &|& DOM OBJECT : input sliders &|&  &&===============> #& -->
+<body>
+  <div id="summary">  </div>
+  <div id="content"></div>
+  <div id="inputSliders">
+    <form id="sliders" autocomplete="off">
+      <fieldset class="inputgroup">
+
+<!-- [ACTIVE DEV] -->
+        <!-- signing bonus -->
+  <div class="slider" id="signingbonus">
+    <p>
+      <label  for="signbonus"
+      style="display: inline-block; width: 100px; text-align: center">
+      sign = <span id="signbonus-value">…</span>
+    </label>
+    <input type="range" min="5" max="20" id="signbonus">
+  </p>
+  <label>signing bonus</label>
+  <p id="signingbonusoutput">$<br>single payment</p>
+    <input type="range" name="sign$" id="sign$" val="5" min="0" max="15" step = "1">
+  </div>
+
+
+  <p>
+    <label for="nHeight"
+    style="display: inline-block; width: 240px; text-align: right">
+    height = <span id="nHeight-value">…</span>
+    </label>
+    <input type="range" min="100" max="280" id="nHeight">
+  </p>
+
+
+
+
+
+  <div class="slider" id="baseSalary">
+    <p>
+      <label  for="baseSal"
+        style="display: inline-block; width: 100px; text-align: center">
+        let sign = <span id="baseSal-value">…</span></label>
+      <input type="range" min="5" max="20" id="baseSal">
+    </p>
+    <label>Base Salary</label>
+    <p id="baseoutput">$<br>/week</p>
+    <input type="range" name="base$" id="base$" val="5" min="0" max="15" step = "1">
+  </div>
+
+  <p>
+    <label for="nBase"
+    style="display: inline-block; width: 240px; text-align: right">
+    height = <span id="nBase-value">…</span>
+    </label>
+    <input type="range" min="80" max="180" id="nBase">
+  </p>
+
+
+
+
+
+
+    </fieldset>
+    </form>
+  </div>
+
+
+ <script>
+
+  var data1 = [
+    { "id": "baseSal",
+    "data" : {
+      "normalizeFn": 1,
+      "min": 80,
+      "val": 120,
+      "max": 150
+      },
+    "category" : {
+      "unit" : "cash",
+      "rate" : "ongoing",
+      "type" : "fixed"
+      },
+    },
+
+    { "id": "annualBonus",
+    "data" : {
+      "normalizeFn": 1,
+      "min": 10,
+      "val": 20,
+      "max": 50
+      },
+    "category" : {
+      "unit" : "cash",
+      "rate" : "lumpSum",
+      "type" : "variable"
+      }
+    }
+
+];
+
+
+
+
+
+var height = 500;
+
+d3.select("#nHeight").on("input", function() {
+  updateHeight(+this.value);
+});
+
+d3.select("#nBase").on("input", function() {
+  updateComp(+this.value);
+});
+
+
+
+updateHeight(120);
+
+function updateHeight(nHeight) {
+  d3.select("#nHeight-value").text(nHeight);
+  d3.select("#nHeight").property("value", nHeight);
+}
+
+
+
+var sign = 15;
+
+//|~  *GET DATA : read change in slider input*    ===> *$
+d3.select("#signbonus").on("input", function() {
+  updateComp(+this.value);
+});
+
+//|~  *POST DATA : update slider values*    ===> *$
+updateComp(12);
+
+//|~  *DATA-BINDING FUNCTION : update text bound to slider*    ===> *$
+function updateComp(comp) {
+  d3.select("#" + comp + "-value").text(comp);
+  d3.select("#" + comp).property("value", comp);
+}
+
+// update the rectangle height
+// d3.selectAll("rect")
+//    .attr("y", 150-(nHeight/2))
+//    .attr("height", nHeight);
+
+
+
+// [TEMP]
+    //~ $>   ******   *|* INPUT DATA : get driving data values *|*  **==========> *$
+    // let workload = $("#workload").val().toString(); // Hot Water Source
+
+
+// [TEMP]
+    // |~ $>   ******   *|* DATA ATTRIBUTES : assign input key-value pairs *|* **=> *$
+      // workloadObj = {'0':'silver', '1':'gold'}
+
+
+// [TEMP]
+  // $("#workload").on("input", function(event) {
+  //   Workload = $(this).val();
+  //   ("#workloadoutput").text(workloadObj[workload]);
+  //   updateComp();
+  // });
+
+
+  //|~   $>   ******   *|* UPDATE DATA : update summary metrics *|*  **==========> *$
+  // d3.selectAll(".resultText").remove();
+
+
+  //|~   $>   ******   *|* DRIVING FUNCTION : update summary metrics *|*  **====> *$
+
+
+  //|~   $>   ******   *|* DRIVING FUNCTION : calculate metrics *|*  **=========> *$
+  // d3.select("#base").append("text")
+  //   .attr("class", "resultText")
+  //   .attr("text-anchor", "start")
+  //   .attr("fill", "pink")
+  //   .style('font-size', '30px')
+  //   .style('font-family', 'sans-serif')
+  //   .text((1).toString());
+  // d3.select("#incentive").append("text")
+  //   .attr("class", "resultText")
+  //   .attr("text-anchor", "start")
+  //   .attr("fill", "#000")
+  //   .style('font-size', '30px')
+  //   .style('font-family', 'sans-serif')
+  //   .text((1).toString());
+  //
+  //   d3.select("#equity").append("text")
+  //   .attr("class", "resultText")
+  //   .attr("text-anchor", "start")
+  //   .attr("fill", "#000")
+  //   .style('font-size', '30px')
+  //   .style('font-family', 'sans-serif')
+  //   .text((1).toString());
+  //
+  //   d3.select("#timereq").append("text")
+  //   .attr("class", "resultText")
+  //   .attr("text-anchor", "start")
+  //   .attr("fill", "#000")
+  //   .style('font-size', '30px')
+  //   .style('font-family', 'sans-serif')
+  //   .text((1).toString());
+  // d3.select("#benefits").append("text")
+  //   .attr("class", "resultText")
+  //   .attr("text-anchor", "start")
+  //   .attr("fill", "#000")
+  //   .style('font-size', '30px')
+  //   .style('font-family', 'sans-serif')
+  //   .text((1).toString());
+  // d3.select("#skillset").append("text")
+  // .attr("class", "resultText")
+  // .attr("text-anchor", "start")
+  // .attr("fill", "#000")
+  // .style('font-size', '30px')
+  // .style('font-family', 'sans-serif')
+  // .text((1).toString());
+    // d3.select("#workload").append("text")
+  // .attr("class", "currentVal")
+  // .attr("fill", "pink")
+  // .style('font-size', '30px')
+  // .style('font-family', 'sans-serif')
+  // .text(data[16].val.toString());
+
+
+//|~  $>   ******   *|* GET DATA : input values from sliders *|*  **==========> *$
+ //  updateComp = function(){
+ //   render()
+ // }
+
+
+//|~  $>   ******   *|* UPDATE FUNCTION : data driving stacked-bars *|*  **===> *$
+//   function render(data) {
+//     // var bars = d3.select("body").selectAll("div.h-bar")
+//     //         .data(data);
+//
+//     var bars = d3.select("body").selectAll("div.g")
+//             .data(data);
+//
+//     bars.enter()
+//       .append("div")
+//         .attr("class", "g")
+//     .merge(bars)
+//       .text("g")
+//             .text(function(d) {
+//               return d.val;
+//             });
+//
+//     bars.exit()
+//       .remove();
+//
+// }
+      // setInterval(function () { // <- L
+//      data.shift();
+//      data.push(Math.round(Math.random() * 100));
+//      render(data);
+//  }, 1500);
+  // render(data);
+
+
+//|~  $>   ******   *|* DRIVING FUNCTION : update data driving ratio-bars *|* > *$
+  // d3.selectAll('.currentVal').remove();
+  // for (i = 0; i < data.length; i++) {
+  //   d3.append("text")
+  //     .attr('fill', "pink")
+  //     .attr("class", "currentVal")
+  //     .style("stroke", "hsla(127, 100%, 7%, 0.88)")
+  //     .style("stroke-width", "0.15em");
+  //     // .text($(this).value.toString());
+  // }
+  //   d3.select("#workload").append("text")
+  //    	.attr("class", "resultText")
+  //     .attr("text-anchor", "start")
+  //     .attr("fill", "#000")
+  //  		.style('font-size', '30px')
+  //  		.style('font-family', 'sans-serif')
+  //     .text($(this).value.toString());
+  // }
+
+
+//|~   $>   ******   *|* CALL FUNCTION : update stacked-bars *|*  **==========> *$
+  updateComp()
+
+
+//|=>  #$>  ***   *|* DOM OBJECT : set frame dimensions *|*  **===============> *$#
+  d3.select(self.frameElement).style("height", 800 + "px");
+
+</script>
+</body>
+
+
+
+
+
+<!--|=> #   ########   #|# DOM ELEMENTS : html objects #|#  ##=================> #  -->
