@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Perkolater</title>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body {
+      margin:0;
+      position: relative;
+      /* background-color: #def7dc; */
+      /* background-image: url("https://www.transparenttextures.com/patterns/black-linen.png"); */
+      /* opacity: 0.2; */
+    }
+    nav {
+      color: white;
+      background-color: black;
+    }
+    #topdash {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.3em;
+      font-variant: small-caps;
+      font-weight: 500;
+      text-align:center;
+      outline:inherit;
+      letter-spacing: 1.5px;
+      padding: 20px 0px 0px 20px;
+      width:auto;
+      margin: auto;
+      display: flex;
+      border-width: 2px;
+      border-color: black;
+      background-color: grey;
+    }
+    #stackedbar {
+      border-width: 2px;
+      border-color: green;
+      background-color: yellow;
+    }
+    .compvalue {
+
+    }
+    #dataviz {
+      border-width: 2px;
+      border-color: blue;
+      background-color: green;
+    }
+    #inputSliders {
+      font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.0em;
+      font-variant: small-caps;
+      font-weight: 200;
+      display: inline-flex;
+      text-align:center;
+      outline: none;
+      padding: 0px;
+      width: auto;
+      margin: 0px;
+      margin-top: 0px;
+    }
+
+    #inputSliders span {
+      margin-top: 0px;
+      font-size: 1.3em;
+    }
+
+    #inputSliders label {
+      margin-top: -5px;
+      padding-top: -5px;
+      font-size: 1.0em;
+    }
+
+    #inputSliders p {
+      padding-top: 0px;
+      font-size: 0.8em;
+    }
+    #cashRate { background-color: lightgreen;  }
+    #equityRate { background-color: lightblue;}
+    #cashBonus { background-color: green; }
+    #equityBonus { background-color: blue;}
+    #timeCommitted { background-color: cornflowerblue; }
+    #timeAllocation {background-color: red;}
+    #pto {background-color: yellow;}
+    #matchContribution401k {background-color:lightgray;}
+    #receivedSubsidy {background-color: lightorange;}
+    #receivedBenefit {background-color: lightbrown;}
+
+    #cashRateOutput { }
+    #equityRateOutput { }
+    #cashBonusOutput { }
+    #equityBonusOutput { }
+    #timeCommittedOutput { }
+    #timeAllocation {}
+    #ptoOutput {}
+    #matchContribution401kOutput {}
+    #receivedSubsidyOutput {}
+    #receivedBenefitOutput {}
+    .card {
+      border-width: 4px;
+      border-color: red;
+    }
+    .slider {
+      min-height: 1px;
+      min-width: 30px;
+      background-color: #4682b4;
+      margin-right: 2px;
+      font-size: 10px;
+      color: orange;
+      text-align: center;
+      width: 10px;
+      display: inline-block;
+    }
+    .dependentslider {
+    }
+    .independentslider {
+    }
+    .intervaldata {
+    }
+    .ratiodata {
+    }
+    .summaryslider {
+    }
+    .v-bar {
+    }
+    .h-bar {
+    }
+    #bottomdash {
+      border-width: 4px;
+      border-color: red;
+    }
+    .bottompanel {
+      border-width: 2px;
+      border-color: gray;
+    }
+    .radar {
+      border-width: 2px;
+      border-color: purple;
+    }
+    .box {
+        display: inline-grid;
+        width: 150px;
+        height: 200px;
+        margin: 10px;
+        float: left;
+        text-align: center;
+        border: #969696 solid thin;
+        padding: 5px;
+    }
+
+    input[type=range] {
+      float:left;
+      clear:left;
+      margin-right:0px;
+      width:150px;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track { height: 3px;background:#7c7c7c; margin-top: -2px;}
+    input[type=range]::-webkit-slider-thumb { margin-top:-6px;}
+    input[type=range]::-ms-track { background: transparent;border-color: transparent;color: transparent;-webkit-appearance: none}
+    .red {
+       background-color: #a1f9ff;
+background-image: url("https://www.transparenttextures.com/patterns/brick-wall-dark.png");;
+        color: #f0f8ff;
+    }
+
+    .blue {
+        background-color: #add8e6;
+        color: #f0f8ff;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>nav bar</nav>
+  <!-- load DOM elements -->
+  <div id="topdash">top dashboard</div>
+  <div id="stackedbar">stackedbar</div>
+  <div id="dataviz">dataviz</div>
+
+  <div id="inputSliders">
+    <form id="sliders" autocomplete="off">
+      <fieldset class="inputgroup">
+        <div class="slider" id="cashRate"></div>
+        <div class="slider" id="cashBonus"></div>
+        <div class="slider" id="equityRate"></div>
+        <div class="slider" id="equityBonus"></div>
+      </fieldset>
+    </form>
+  </div>
+
+  <div id="bottomdash">bottom dash</div>
+
+
+
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+
+<script type="text/javascript">
+// load data
+// var data = [42, "word", 123, 33];
+var labels = ["cashRate", "equityRate", "cashBonus", "equityBonus", "timeCommittment", "timeAllocation"];
+
+
+
+var height = 500,
+    width = 500,
+    margin = 25,
+    axisWidth = width - 2 * margin;
+
+var svg = d3.select("body").append("svg")
+        .attr("class", "axis")
+        .attr("width", width)
+        .attr("height", height);
+
+var scale = d3.scaleLinear()
+        .domain([0, 1]).range([0, axisWidth]);
+
+var axis = d3.axisBottom()
+        .scale(scale)
+        .ticks(10)
+        .tickSize(12) 
+        .tickPadding(10)
+        .tickFormat(d3.format(".0%"));
+
+
+        svg.append("g")
+        .attr("transform", function(){
+          return "translate(" + margin +
+          "," + margin + ")";
+        })
+        .call(axis);
+
+
+
+
+
+function render(labels) {
+    var sliders = d3.select("body").selectAll("div.slider")
+            .data(labels);
+    // Enter
+    sliders.enter()
+            .append("div")
+                .attr("class", "slider blue box")
+            .merge(sliders) // Enter + Update
+            .style("width", function (d) {
+                return (d * 2) + "px";
+            })
+            .style("color", "orange")
+            .text(function (d) {
+                return d;
+            });
+    // Exit
+    sliders.exit()
+            .remove();
+}
+
+    setInterval(function () {
+        data.shift();
+        data.push(Math.round(Math.random() * 100));
+        render(labels);
+    }, 2500);
+
+    render(labels);
+
+
+
+
+    var sliderPanel = d3.selectAll("p");
+
+    sliderPanel.append("section")
+    .attr("id", "cashRate")
+    .append("div")
+    .attr("class", "blue box")
+    .each(function (d, i) {
+      d3.select(this).append("h1")
+      .text(labels[i]);
+    });
+
+
+
+    d3.selectAll("div")
+            .attr("class", "red box")
+            .each(function (d, i) {
+                d3.select(this).append("h1").text(i);
+            });
+
+
+
+
+
+  //
+  // <div class="slider" id="signingbonus">
+  //   <p>
+  //     <label  for="signbonus"
+  //     style="display: inline-block; width: 100px; text-align: center">
+  //     sign = <span id="signbonus-value">…</span>
+  //     </label>
+  //     <input type="range" min="5" max="20" id="signbonus">
+  //   </p>
+  //   <label>signing bonus</label>
+  //   <p id="signingbonusoutput">$<br>single payment</p>
+  //   <input type="range" name="sign$" id="sign$" val="5" min="0" max="15" step = "1">
+  // </div>
+
+  //
+  // // declare variables
+  //   var topDash = <p>top dash p</p>;
+  //   // var topDash = `<div id=topdash><p>top</>`;
+  //   var stackedbar = document.querySelector(#stackedbar).append(`<div id=stackedbar><p>top</>`).innerHTML;
+  //   var dataviz = `<div id=dataviz><p>top</>`;
+  //   var sliderinputs = `<div id=sliderinputs><p>top</>`;
+  //   var bottomdash = `<div id=bottomdash><p>top</>`;
+  //
+
+
+</script>
+</body>
