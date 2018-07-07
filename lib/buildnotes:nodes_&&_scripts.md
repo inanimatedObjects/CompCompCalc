@@ -1,3 +1,17 @@
+state change fundamentals:
+  operativeFunction(currentStateRootDOMObject) => newCurrentStateRootDOMObject
+
+  var operativeFunction = (rootNode) => {
+    var manualPropertyUpserts = userEntry
+    var programmaticPropertyUpserts = runFunctions
+
+    var changeState = (manualPropertyUpserts, programmaticPropertyUpserts ) => {
+
+
+    }
+  }
+
+
 
 # RUN SCRIPT > CLIENT BROWSER
   ## client > server : HTTP GET request
