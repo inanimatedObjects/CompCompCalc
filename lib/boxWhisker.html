@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		body {
+			font-family: "Helvetica Neue", sans-serif;
+			margin: 0;
+      background-color: #fff4fd;
+		}
+
+		.box, .line, .line-dotted {
+      padding-top: 30px;
+			stroke: #000;
+			stroke-width: 0.5px;
+		}
+		.box {
+			fill: #dbffff;
+      stroke: cornflowerblue;
+			stroke-width: 1.5px;
+      stroke-dasharray: 5,3;
+		}
+		.line-dotted {
+			stroke-dasharray: 1,3;
+		}
+
+		.text {
+			font-size: 0.7em;
+		}
+    .text.top, .text.bottom {
+			text-anchor: top;
+      fill: #e599ff;
+      font-size: 1.2em;
+		}
+		.text.three, .text.one {
+			text-anchor: end;
+      fill: #00a8a8;
+      font-size: 0.8em;
+		}
+    .text.med {
+      stroke: none;
+      stroke-width: 0.0px;
+      font-size: 1.4em;
+      fill: #ff0537;
+      }
+    .line.med {
+      stroke: red;
+      stroke-width: 8px;
+   		stroke-dasharray: 1,2;
+
+      }
+
+		.label {
+			text-anchor: middle;
+      font-size: 0.8em
+		}
+		</style>
+	</head>
+	<body>
+		<div id="viz"></div>
+
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="https://unpkg.com/d3-marcon/build/d3-marcon.min.js"></script>
+		<script src="https://unpkg.com/jeezy/lib/jeezy.min.js"></script>
+		<script>
+			var letters = "flowRate( $ ),flowRate( assets ),incentive( $),incentive( assets),Risk".split(",");
+
+			var setup = d3.marcon().top(50).bottom(100).left(20).right(20).width(window.innerWidth).height(window.innerHeight);
+			setup.render();
+			var width = setup.innerWidth(),
+				height = setup.innerHeight(),
+				svg = setup.svg();
+
+			var x = d3.scaleBand().rangeRound([0, width]).padding(0.8).domain(letters);
+			var y = d3.scaleLinear().range([height + 0, 100]);
+
+			var dy = 7;
+
+			function generate_data(){
+
+				return letters.map(function(d){
+
+					return {
+						id: d,
+						max: 100,
+						min: 0,
+						three: 75,
+						median: jz.num.randBetween(25, 90),
+						one: 25
+					}
+
+				});
+
+			}
+
+			draw(generate_data());
+
+// 			d3.interval(function(){
+// 				draw(generate_data());
+// 			}, 10000);
+
+			function draw(data){
+
+				// update the y domain
+				y.domain([d3.min(data, function(d){ return d.min; }), d3.max(data, function(d){ return d.max; })]);
+
+				// JOIN
+				var box = svg.selectAll(".box")
+					.data(data, function(d, i){ return d.id; });
+
+				var line_dotted_top = svg.selectAll(".line-dotted.top")
+					.data(data, function(d, i){ return d.id; });
+
+				var line_dotted_bottom = svg.selectAll(".line-dotted.bottom")
+					.data(data, function(d){ return d.id; });
+
+				var line_top = svg.selectAll(".line.top")
+					.data(data, function(d){ return d.id; });
+
+				var line_bottom = svg.selectAll(".line.bottom")
+					.data(data, function(d){ return d.id; });
+
+				var line_med = svg.selectAll(".line.med")
+					.data(data, function(d){ return d.id; });
+
+				var text_top = svg.selectAll(".text.top")
+					.data(data, function(d){ return d.id; });
+
+				var text_75 = svg.selectAll(".text.three")
+					.data(data, function(d){ return d.id; });
+
+				var text_med = svg.selectAll(".text.med")
+					.data(data, function(d){ return d.id; });
+
+				var text_25 = svg.selectAll(".text.one")
+					.data(data, function(d){ return d.id; });
+
+				var text_bottom = svg.selectAll(".text.bottom")
+					.data(data, function(d){ return d.id; });
+
+				var label = svg.selectAll(".label")
+					.data(data, function(d){ return d.id; })
+
+				// UPDATE
+				box
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y", function(d){ return y(d.three); })
+						.attr("height", function(d){ return y(d.one) - y(d.three); });
+
+				line_dotted_top
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y1", function(d){ return y(d.three); })
+						.attr("y2", function(d){ return y(d.max); });
+
+				line_dotted_bottom
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y1", function(d){ return y(d.one); })
+						.attr("y2", function(d){ return y(d.min); });
+
+				line_top
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y1", function(d){ return y(d.max); })
+						.attr("y2", function(d){ return y(d.max); });
+
+				line_med
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y1", function(d){ return y(d.median); })
+						.attr("y2", function(d){ return y(d.median); });
+
+				line_bottom
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y1", function(d){ return y(d.min); })
+						.attr("y2", function(d){ return y(d.min); });
+
+				text_top
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y", function(d){ return y(d.max); })
+						.text(function(d){ return d.max; });
+
+				text_75
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y", function(d){ return y(d.three); })
+						.text(function(d){ return d.three; });
+
+				text_med
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y", function(d){ return y(d.median); })
+						.text(function(d){ return d.median; });
+
+				text_25
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y", function(d){ return y(d.one); })
+						.text(function(d){ return d.one; });
+
+				text_bottom
+					.transition().delay(function(d, i){ return i * 500; })
+						.attr("y", function(d){ return y(d.min); })
+						.text(function(d){ return d.min; });
+
+				// ENTER
+				box.enter().append("rect")
+						.attr("class", "box")
+						.attr("x", function(d){ return x(d.id); })
+						.attr("y", function(d){ return y(d.three); })
+						.attr("width", x.bandwidth())
+						.attr("height", function(d){ return y(d.one) - y(d.three); });
+
+				line_dotted_top.enter().append("line")
+						.attr("class", "line-dotted top")
+						.attr("x1", function(d){ return x(d.id) + x.bandwidth() / 2; })
+						.attr("x2", function(d){ return x(d.id) + x.bandwidth() / 2; })
+						.attr("y1", function(d){ return y(d.three); })
+						.attr("y2", function(d){ return y(d.max); });
+
+				line_dotted_bottom.enter().append("line")
+						.attr("class", "line-dotted bottom")
+						.attr("x1", function(d){ return x(d.id) + x.bandwidth() / 2; })
+						.attr("x2", function(d){ return x(d.id) + x.bandwidth() / 2; })
+						.attr("y1", function(d){ return y(d.one); })
+						.attr("y2", function(d){ return y(d.min); });
+
+				line_top.enter().append("line")
+						.attr("class", "line top")
+						.attr("x1", function(d){ return x(d.id); })
+						.attr("x2", function(d){ return x(d.id) + x.bandwidth(); })
+						.attr("y1", function(d){ return y(d.max); })
+						.attr("y2", function(d){ return y(d.max); });
+
+				line_med.enter().append("line")
+					.attr("class", "line med")
+						.attr("x1", function(d){ return x(d.id); })
+						.attr("x2", function(d){ return x(d.id) + x.bandwidth(); })
+						.attr("y1", function(d){ return y(d.median); })
+						.attr("y2", function(d){ return y(d.median); });
+
+				line_bottom.enter().append("line")
+						.attr("class", "line bottom")
+						.attr("x1", function(d){ return x(d.id); })
+						.attr("x2", function(d){ return x(d.id) + x.bandwidth(); })
+						.attr("y1", function(d){ return y(d.min); })
+						.attr("y2", function(d){ return y(d.min); });
+
+				text_top.enter().append("text")
+						.attr("class", "text top")
+						.attr("x", function(d){ return x(d.id) + x.bandwidth() + dy; })
+						.attr("y", function(d){ return y(d.max); })
+						.attr("dy", dy)
+						.text(function(d){ return d.max; });
+
+				text_75.enter().append("text")
+						.attr("class", "text three")
+						.attr("x", function(d){ return x(d.id) - dy; })
+						.attr("y", function(d){ return y(d.three); })
+						.attr("dy", dy)
+						.text(function(d){ return d.three; });
+
+				text_med.enter().append("text")
+						.attr("class", "text med")
+						.attr("x", function(d){ return x(d.id) + x.bandwidth() + dy; })
+						.attr("y", function(d){ return y(d.median); })
+						.attr("dy", dy)
+						.text(function(d){ return d.median; });
+
+				text_25.enter().append("text")
+						.attr("class", "text one")
+						.attr("x", function(d){ return x(d.id) - dy; })
+						.attr("y", function(d){ return y(d.one); })
+						.attr("dy", dy)
+					.text(function(d){ return d.one; });
+
+				text_bottom.enter().append("text")
+						.attr("class", "text bottom")
+						.attr("x", function(d){ return x(d.id) + x.bandwidth() + dy; })
+						.attr("y", function(d){ return y(d.min); })
+						.attr("dy", dy)
+						.text(function(d){ return d.min; });
+
+				label.enter().append("text")
+					.attr("class", "label")
+					.attr("x", function(d){ return x(d.id) + x.bandwidth() / 2; })
+					.attr("y", -10)
+					.text(function(d){ return d.id; })
+			}
+
+		</script>
+	</body>
+</html>
