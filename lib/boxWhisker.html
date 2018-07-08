@@ -56,20 +56,24 @@
 		</style>
 	</head>
 	<body>
+    <!-- d3 html reference element -->
 		<div id="viz"></div>
-
+<!-- load scripts -->
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 		<script src="https://unpkg.com/d3-marcon/build/d3-marcon.min.js"></script>
 		<script src="https://unpkg.com/jeezy/lib/jeezy.min.js"></script>
 		<script>
 			var letters = "flowRate( $ ),flowRate( assets ),incentive( $),incentive( assets),Risk".split(",");
 
+// d3 dimensions
 			var setup = d3.marcon().top(50).bottom(100).left(20).right(20).width(window.innerWidth).height(window.innerHeight);
 			setup.render();
 			var width = setup.innerWidth(),
 				height = setup.innerHeight(),
 				svg = setup.svg();
 
+
+// d3 scales
 			var x = d3.scaleBand().rangeRound([0, width]).padding(0.8).domain(letters);
 			var y = d3.scaleLinear().range([height + 0, 100]);
 
@@ -91,13 +95,16 @@
 				});
 
 			}
-
+// generate d3 graph
 			draw(generate_data());
 
-// 			d3.interval(function(){
-// 				draw(generate_data());
-// 			}, 10000);
+// animate on setInterval 
+  // 			d3.interval(function(){
+  // 				draw(generate_data());
+  // 			}, 10000);
 
+
+// d3 chart components
 			function draw(data){
 
 				// update the y domain
