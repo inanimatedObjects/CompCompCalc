@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
+  </style>
+</head>
+
+<body>
+<div id="color-diverge" class="clear">
+    <span>Poly-Linear Color Interpolation<br></span>
+</div>
+
+ <div class="control-group clear">
+    <button style="margin:5px;" onclick="render(data, divergingScale(1), '#color-diverge')">Pivot at extreme</button>
+    <button style="margin:10px;" onclick="render(data, divergingScale(3), '#color-diverge')">Pivot at low</button>
+    <button style="margin:20px;" onclick="render(data, divergingScale(5.5), '#color-diverge')">Pivot at mid</button>
+    <button style="margin-left:10px;" onclick="render(data, divergingScale(7), '#color-diverge')">Pivot at high</button>
+    <button style="margin-left:25px;" onclick="render(data, divergingScale(9), '#color-diverge')">Pivot at extreme</button>
+  </div>
+
+<div id="font" class="clear">
+ <span>font-size interpolator<br></span>
+</div>
+
+<div id="color" class="clear">
+    <span>Linear Color Interpolation<br></span>
+</div>
+
+
+<script type="text/javascript">
+    var max = 11, data = [];
+
+    var sizeScale = d3.scaleLinear()
+        .domain([0, max])
+        .range([
+            "12px/80px Helvetica Neue, sans-serif", //text size range
+            "bold 100px/200px Helvetica Neue, sans-serif" // vertical range
+        ]);
+
+    var decrementSizeScale = d3.scaleLinear()
+        .domain([0, max])
+        .range([
+          "bold 100px/200px Helvetica Neue, sans-serif",
+          "12px/80px Helvetica Neue, sans-serif" //text size range
+        ]);
+
+    var midpointScale = function(pivot) {
+      return d3.scaleLinear()
+        .domain([0, pivot, max])
+        .range(["bold 20px/30px Helvetica Neue, sans-serif", "bold 100px/130px Helvetica Neue, sans-serif", "bold 30px/80px Helvetica Neue, sans-serif"])
+    };
+
+    var colorScale = d3.scaleLinear()
+    .domain([0, max])
+    .range(["white", "#3ea319"]);
+
+    var textColorScale = d3.scaleLinear()
+    .domain([0, max])
+    .range(["#010400", "white"]);
+
+    var divergingScale = function(pivot) {
+        return d3.scaleLinear()
+                .domain([0, pivot, max])
+                .range(["#dc2b22", "white", "#2250dc"])
+    };
+
+    for (var i = 0; i < max; ++i) data.push(i);
+
+    function renderFont(data, scale, selector) {
+        var cells = d3.select(selector).selectAll("div.cell")
+                .data(data);
+
+        cells.enter()
+            .append("div").merge(cells)
+                .classed("cell", true)
+                .style("display", "inline-block")
+        				.style("border", "1px solid cornflowerblue")
+				        .style("padding", "8px")
+				        .style("margin", "2px")
+ 				        .style("background", " #1cb6ce")
+ 				        .style("border", "dotted 3px red")
+            .append("span")
+                .style("font", function(d,i){
+                    return scale(d);
+                })
+ 				        .style("color", "#f3f6c5")
+                .text(function(d,i){return i;});
+    }
+
+  function render(data, scale, selector) {
+    var cells = d3.select(selector).selectAll("div.cell")
+    .data(data);
+
+    cells.enter()
+      .append("div").merge(cells)
+      .classed("cell", true)
+      .style("display", "inline-block")
+      .style("background-color", function(d){
+      return scale(d);
+    })
+    	.style("color", function(d){
+      return textColorScale(d);
+    })
+//       .style("font", function(d,i){
+//       return sizeScale(d);
+//     })
+      .style("font", function(d,i){
+      return scale(d);
+    })
+      .style("border", "1px solid lightgray")
+			.style("padding", "8px")
+			.style("margin", "2px")
+      .text(function(d,i){return i;});
+  }
+
+    renderFont(data, sizeScale, "#font");
+
+	  render(data, decrementSizeScale, "#color");
+	  render(data, colorScale, "#color");
+
+	  render(data, midpointScale(5), "#color-diverge");
+   	render(data, divergingScale(5), "#color-diverge");
+</script>
+
+
+</body>
