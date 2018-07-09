@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>double input binding</title>
+
+<div class="cash rate" id="salary">
+  <h2>Annual Salary  ($ / year)</h2>
+  <p>
+    <label for="nHeight"
+           style="display: inline-block; width: 240px; text-align: left; padding-top: 10px; fill: #dbffff; stroke: cornflowerblue; stroke-width:1.5px">
+           $ amount = <span id="nHeight-value">…</span>
+    </label>
+    <input type="range" min="1" max="100" id="nHeight">
+  </p>
+
+  <p>
+    <label for="nWidth"
+           style="display: inline-block; width: 240px; text-align: left; padding-bottom: 20px">
+           % of range extent = <span id="nWidth-value">…</span>
+    </label>
+    <input type="range" min="0" max="100" id="nWidth">
+  </p>
+</div>
+
+<div class="cash lump"id="cashBonus">
+  <h2>Performance Bonus ($ / hit target)</h2>
+  <p>
+    <label for="nBonusDriver"
+           style="display: inline-block; width: 240px; text-align: left; padding-top: 10px; fill: #dbffff; stroke: cornflowerblue; stroke-width:1.5px">
+           target driver = <span id="nBonusDriver-value">…</span>
+    </label>
+    <input type="range" min="1" max="50" id="nBonusDriver">
+  </p>
+
+  <p>
+    <label for="nBonusFactor"
+           style="display: inline-block; width: 240px; text-align: left; padding-bottom: 0px">
+           multiplier = <span id="nBonusFactor-value">…</span>
+    </label>
+    <input type="range" min="0" max="100" id="nBonusFactor">
+  </p>
+
+  <p>
+    <label for="nBonusOutput"
+           style="display: inline-block; width: 240px; text-align: left; padding-bottom: 0px">
+           bonus amount = <span id="nBonusOutput-value">…</span>
+    </label>
+    <input type="range" min="0" max="100" id="nBonusOutput">
+  </p>
+</div>
+
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+// viz pixel footprint
+var extent = [0, 100];
+
+var height = 60;
+var width = 500;
+
+var salaryCard = d3.select("#salary")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+// draw a rectangle
+salaryCard.append("rect")
+    .style("fill", "cornflowerblue")
+    .style("stroke", "red")
+    .attr("height", height)
+    .attr("width", width + height)
+    .attr("x", width + height)
+    .attr("y", height);
+
+// read a change in the height input
+d3.select("#nHeight").on("input", function() {
+// 	updateHeight(+this.value)
+  updateWidth(+this.value);
+});
+
+// read a change in the width input
+d3.select("#nWidth").on("input", function() {
+  updateWidth(+this.value);
+});
+
+// update the values
+updateHeight(+this.width);
+updateWidth(100);
+
+// Update the height attributes
+function updateHeight(nHeight) {
+	var sum = width + height;
+  // adjust the text on the range slider
+  d3.select("#nHeight-value").text(nHeight);
+  d3.select("#nHeight").property("value", nHeight);
+
+  // update the rectangle height
+  salaryCard.selectAll("rect")
+    .attr("y", 50-(nHeight/2))
+    .attr("height", nHeight);
+}
+
+// Update the width attributes
+function updateWidth(nWidth) {
+
+  // adjust the text on the range slider
+  d3.select("#nWidth-value").text(nWidth);
+  d3.select("#nWidth").property("value", nWidth);
+
+  // update the rectangle width
+  salaryCard.selectAll("rect")
+    .attr("x", 300-(nWidth/2))
+    .attr("width", nWidth);
+}
+
+</script>
