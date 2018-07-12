@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body {
+      margin:0;
+      position:fixed;
+      top:0;
+      right:0;
+      bottom:0;
+      left:0;
+
+    }
+    div{
+      margin-top: 50px;
+      margin-left: 50px;
+    }
+
+    .v-bar {
+      min-height: 1px;
+      min-width: 50px;
+      background-color: #36658b;
+      margin-right: 2px;
+      font-size: 25px;
+      font-weight: 100;
+      color: #f92440;
+      text-align: center;
+      width: 10px;
+      display: inline-block;
+     }
+
+		.baseline {
+      height: 1px;
+      background-color: black;
+    }
+  </style>
+</head>
+
+<body>
+<script type="text/javascript">
+var id= 0,
+data = [],
+duration = 500,
+chartHeight = 100,
+chartWidth = 680;
+
+// for(var i = 0; i< 20; i++) push(data);
+
+var data = [
+            {value: '1', name: 'Linear', fn: d3.easeLinear},
+            {value: '2', name: 'Cubic', fn: d3.easeCubic},
+            {value: '3', name: 'CubicIn', fn: d3.easeCubicIn},
+            {value: '4', name: 'Sin', fn: d3.easeSin},
+            {value: '5', name: 'SinIn', fn: d3.easeSinIn},
+            {value: '6', name: 'Exp', fn: d3.easeExp},
+            {value: '7', name: 'Circle', fn: d3.easeCircle},
+            {value: '8', name: 'Back', fn: d3.easeBack},
+            {value: '9', name: 'Bounce', fn: d3.easeBounce},
+            {value: '10', name: 'Elastic', fn: d3.easeElastic},
+            {value: '11', name: 'Custom', fn: function(t){ return t * t; }}
+    ],
+colors = d3.scaleOrdinal(d3.schemeCategory20b);
+
+function render(data) {
+        var selection = d3.select("body")
+                .selectAll("div.v-bar")
+                 .data(data, function(d){return d.id;});
+
+        // enter
+        selection.enter()
+                .append("div")
+                .attr("class", "v-bar")
+                .style("z-index", "0")
+                .style("position", "fixed")
+                .style("top", chartHeight + "px")
+                 .style("left", function(d, i){
+                    return barLeft(i+1) + "px";
+                })
+                .style("height", "0px")
+                .append("span");
+
+        // update
+        selection
+           .each(function(d){
+    					d3.select(this)
+                .transition().ease(d.fn)
+                .duration(1500)
+                .style("left", "10px")
+
+                .style("top", function (d) {
+                       return chartHeight - barHeight(d.value) + "px";
+                })
+                .style("left", function(d, i){
+                    return barLeft(i) * 2 + "px";
+                })
+                .style("height", function (d) {
+                    return barHeight(d.value) + 0 + "px";
+                })
+                .select("span")
+                .text(function (d) {return d.value;});
+            });
+
+        // exit
+        selection.exit()
+                .transition().duration(duration)
+               	.style("opacity", "0.1")
+          			.style("left", function(d, i){
+                    return barLeft(d.value) + "px";
+                })
+                .style("height", function (d) {
+                		return barHeight(d.value) * 1 + "px";
+                })
+      				  .style("top", chartHeight * 2 + "px")
+        				.style("background-color", "red")
+                .remove();
+    }
+
+function push(data) {
+    data.push({
+        id: ++id,
+        value: Math.round(Math.random() * chartHeight)
+    });
+}
+
+function barLeft(i) {
+    return i * (30);
+}
+
+function barHeight(d) {
+    return d.value;
+}
+
+setInterval(function () {
+               data.shift();
+               push(data);
+               render(data);
+    }, 3000);
+
+
+// data.shift();
+// push(data);
+// render(data);
+
+render(data.);
+
+d3.select("body")
+       .append("div")
+           .attr("class", "baseline")
+           .style("position", "fixed")
+           .style("z-index", "1")
+           .style("top", chartHeight + "px")
+           .style("left", "0px")
+           .style("width", chartWidth + "px");
+</script>
+</body>
