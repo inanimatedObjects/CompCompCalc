@@ -16,7 +16,8 @@
     "url": "https://github.com/inanimatedObjects/CompCompCalc"
   },
   "dependencies": {
-    "d3": "4.x"
+    "d3": "4.x",
+    "live-server": "^1.2.0"
   },
   "devDependencies": {
     "uglify-js": "2.x"
