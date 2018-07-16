@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body {
+      margin:0;
+      position:fixed;
+      top:0;
+      right:0;
+      bottom:0;
+      left:0;
+    }
+    .h-bar {
+      min-height: 15px;
+      min-width: 10px;
+      background-color: steelblue;
+      margin-bottom: 2px;
+      font-size: 11px;
+      color: #f0f8ff;
+      text-align: right;
+      padding-right: 2px;
+		}
+    svg {
+      border: 11px double cornflowerblue;
+      margin: 5px;
+    }
+    .card {
+      font-size: 16px;
+      font-family: "monospace";
+      fill: "#042543";
+      color: #00203d;
+      text-align: right;
+    }
+    .resultText{
+      text-align: left;
+      padding-top: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+
+    var svg = d3.select("body").append("svg")
+      .attr("width", 460)
+      .attr("height", 300)
+
+
+    var compData = [ // <- A
+      {value: 10, name: "cashSign", color: 13},
+      {value: 15, name: "cashRate", color: 33},
+      {value: 30, name: "cashBonus", color: 23},
+      {value: 50, name: "eqSign", color: 73},
+      {value: 80, name: "eqRate", color: 83},
+      {value: 65, name: "eqBonus", color: 93},
+      {value: 55, name: "timeRate", color: 3},
+      {value: 30, name: "timeAllocation", color: 6},
+      {value: 20, name: "timeUtilization", color: 9},
+      {value: 10, name: "perkEmployerPaid", color: 53},
+      {value: 8, name: "perkEmployeeReimbursed", color: 63}
+    ];
+
+    var colorScale = d3.scaleLinear()
+    .domain([0, 100])
+    .range(["#ade5b3", "#fc882f"]);
+
+    var borderColorScale = d3.scaleLinear()
+    .domain([0, 100])
+    .range(["#4395c5", "#ff32dc"]);
+
+    function renderCards(data) {
+      var cards = d3.select("body").selectAll("svg")
+        .data(data);
+
+        cards.enter()
+          .append("svg")
+          .attr("class", "card")
+          .merge(cards)
+          .style("height", "200px")
+          .style("width", "200px")
+          .style("background-color", function(d){
+              return colorScale(d.color);
+          })
+          .style("border", function(d){
+              return "11px double " + borderColorScale(d.color);
+          })
+//           .text(function (d) {
+//           	return d.name;
+//           })
+        ;
+
+         d3.selectAll("svg").append("text")
+      	.attr("class", "resultText")
+        .attr("fill", "#000")
+    		.style('font-size', '60px')
+    		.style('font-family', 'sans-serif')
+        .text(function (d) {
+          	return d.name;
+          });
+
+        cards.exit().remove();
+
+      }
+
+        function randomValue() {
+        return Math.round(Math.random() * 100);
+    }
+
+    setInterval(function () {
+        compData.shift();
+        compData.push({value: randomValue(), color: randomValue()});
+        renderCards(compData);
+    }, 3500);
+
+    renderCards(compData);
+
+
+
+  </script>
+</body>
