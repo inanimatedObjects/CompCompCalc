@@ -1,0 +1,18 @@
+viewof x = {
+  const form = html`<form>
+  <div><input name=nonlinear type=range min=0 max=1 step=any> </div>
+  <div><input name=linear type=range min=0 max=1 step=any> </div>
+</form>`;
+  const nonlinear = form.nonlinear;
+  const linear = form.linear;
+  nonlinear.value = transform.invert(form.value = linear.value = 0.5);
+  nonlinear.parentNode.appendChild(tex`\sqrt{x}`);
+  nonlinear.addEventListener("input", () => {
+    linear.value = form.value = transform(nonlinear.valueAsNumber);
+  });
+  linear.parentNode.appendChild(tex`x`);
+  linear.addEventListener("input", () => {
+    nonlinear.value = transform.invert(form.value = linear.valueAsNumber);
+  });
+  return form;
+}
