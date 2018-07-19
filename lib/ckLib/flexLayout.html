@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body {
+      margin:0;position:fixed;top:0;right:0;bottom:0;left:0;
+    }
+
+    .sliderPanel {
+      display: flex;
+      flex-direction: column;
+			align-items: center;
+      border: 1px solid red;
+    }
+
+    .sliderRow {
+      height: 100px;
+      margin: 10px;
+      padding: 10px;
+			border: 1px solid green;
+    }
+
+    .card {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid blue;
+    }
+
+  </style>
+</head>
+
+	<div class="sliderPanel">
+    <svg>
+      <div class="sliderRow">
+      	<g id="summaryPanel">
+          <p>comp sliders</p>
+          <g class="card"> cash sum </g>
+          <g class="card"> equity sum </g>
+          <g class="card"> benefits sum </g>
+          <g class="card"> time sum </g>
+      	</g>
+			</div>
+      <div class="sliderRow">
+        <g id="cashPanel">
+          <p>cash sliders</p>
+          <g class="card"> signing bonus </g>
+          <g class="card"> salary </g>
+          <g class="card"> performance bonus </g>
+        </g>
+			</div>
+      <div class="sliderRow">
+        <g id="perkPanel">
+          <p>perk sliders</p>
+          <g class="card"> sigining equity </g>
+          <g class="card"> earned equity </g>
+          <g class="card"> bonus equity </g>
+        </g>
+      </div>
+			<div class="sliderRow">
+        <g id="timePanel">
+          <p>time sliders</p>
+          <g class="card"> time committment </g>
+          <g class="card"> workload </g>
+          <g class="card"> utilization </g>
+        </g>
+      </div>
+    </svg>
+	</div>
+
+<body>
+  <script>
+    // Feel free to change or delete any of the code you see in this editor!
+    var svg = d3.select("body").append("svg")
+      .attr("width", 960)
+      .attr("height", 500)
+
+  </script>
+</body>
