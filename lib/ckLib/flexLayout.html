@@ -30,50 +30,37 @@
   </style>
 </head>
 
+  <h1>perkolator</h1>
 	<div class="sliderPanel">
-    <svg>
-      <div class="sliderRow">
-      	<g id="summaryPanel">
-          <p>comp sliders</p>
-          <g class="card"> cash sum </g>
-          <g class="card"> equity sum </g>
-          <g class="card"> benefits sum </g>
-          <g class="card"> time sum </g>
-      	</g>
-			</div>
-      <div class="sliderRow">
-        <g id="cashPanel">
-          <p>cash sliders</p>
-          <g class="card"> signing bonus </g>
-          <g class="card"> salary </g>
-          <g class="card"> performance bonus </g>
-        </g>
-			</div>
-      <div class="sliderRow">
-        <g id="perkPanel">
-          <p>perk sliders</p>
-          <g class="card"> sigining equity </g>
-          <g class="card"> earned equity </g>
-          <g class="card"> bonus equity </g>
-        </g>
-      </div>
-			<div class="sliderRow">
-        <g id="timePanel">
-          <p>time sliders</p>
-          <g class="card"> time committment </g>
-          <g class="card"> workload </g>
-          <g class="card"> utilization </g>
-        </g>
-      </div>
+  	<svg class="sliderRow" id="summaryPanel">
+      <g class="card"> cash sum </g>
+      <g class="card"> equity sum </g>
+      <g class="card"> benefits sum </g>
+      <g class="card"> time sum </g>
+  	</svg>
+    <svg class="sliderRow" id="cashPanel">
+      <g class="card"> signing bonus </g>
+      <g class="card"> salary </g>
+      <g class="card"> performance bonus </g>
+    </svg>
+    <svg class="sliderRow" id="perkPanel">
+      <g class="card"> sigining equity </g>
+      <g class="card"> earned equity </g>
+      <g class="card"> bonus equity </g>
+    </svg>
+    <svg class="sliderRow" id="timePanel">
+      <g class="card"> time committment </g>
+      <g class="card"> workload </g>
+      <g class="card"> utilization </g>
     </svg>
 	</div>
 
 <body>
   <script>
-    // Feel free to change or delete any of the code you see in this editor!
-    var svg = d3.select("body").append("svg")
-      .attr("width", 960)
-      .attr("height", 500)
+  var cardRow = d3.selectAll("svg")
+    .append("g")
+      .attr("id", "")
+
 
   </script>
 </body>
