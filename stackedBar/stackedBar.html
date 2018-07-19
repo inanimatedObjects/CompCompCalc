@@ -3,11 +3,11 @@
   <meta charset="utf-8">
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <style>
-  .chart rect {
+  #chart rect {
     fill: steelblue;
   }
 
-  .chart text {
+  #chart text {
     fill: white;
     font: 10px sans-serif;
     text-anchor: end;
@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <svg class="chart" />
+  <svg id="chart" />
   <script>
 
     d3.json("../lib/data/data2.json", function(error, data) {
@@ -54,7 +54,7 @@
     }
 		var labelPositions = getLabelPositions(categoryTotals);
 
-    var chart = d3.select('.chart')
+    var chart = d3.select('#chart')
     		.attr('width', width)
     		.attr('height', barHeight * data.length);
 

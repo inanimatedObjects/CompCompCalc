@@ -2,35 +2,15 @@
   {
     "base" : {
       "salary" : {
-<<<<<<< HEAD
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "total":
-=======
         "max" : 1,
         "min" : 0,
         "val" : 1
       },
       "total": 80000
->>>>>>> 6440e243f7fe9e7510fab47b9310fcf943e04ac1
     },
 
     "incentive" : {
       "signBonus" : {
-<<<<<<< HEAD
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "perfBonus" : {
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "total" :
-=======
         "max" : 1,
         "min" : 0,
         "val" : 1
@@ -41,23 +21,10 @@
         "val" : 1
       },
       "total" : 20000
->>>>>>> 6440e243f7fe9e7510fab47b9310fcf943e04ac1
     },
 
     "equity" : {
       "signEq" : {
-<<<<<<< HEAD
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "earnedEq" : {
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "total" :
-=======
         "max" : 1,
         "min" : 0,
         "val" : 1
@@ -68,33 +35,10 @@
         "val" : 1
       },
       "total" : 30000
->>>>>>> 6440e243f7fe9e7510fab47b9310fcf943e04ac1
     },
 
     "benefits" : {
       "paidHealth" : {
-<<<<<<< HEAD
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "expenseAcct" : {
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "subsidies" : {
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "401k" : {
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "total" :
-=======
         "max" : 1,
         "min" : 0,
         "val" : 1
@@ -115,23 +59,10 @@
         "val" : 1
       },
       "total" : 10000
->>>>>>> 6440e243f7fe9e7510fab47b9310fcf943e04ac1
     },
 
     "availability" : {
       "vacation" : {
-<<<<<<< HEAD
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "workload" : {
-        "max" : ,
-        "min" : ,
-        "val" :
-      },
-      "total" :
-=======
         "max" : 1,
         "min" : 0,
         "val" : 1
@@ -142,7 +73,6 @@
         "val" : 40
       },
       "total" : 8000
->>>>>>> 6440e243f7fe9e7510fab47b9310fcf943e04ac1
     }
 
   }

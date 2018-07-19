@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body {
+      margin:0;position:fixed;top:0;right:0;bottom:0;left:0;
+    }
+
+    .sliderPanel {
+      display: flex;
+      flex-direction: column;
+			align-items: center;
+      border: 1px solid red;
+    }
+
+    .sliderRow {
+      height: 100px;
+      margin: 10px;
+      padding: 10px;
+			border: 1px solid green;
+    }
+
+    .card {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid blue;
+    }
+
+  </style>
+</head>
+
+  <h1>perkolator</h1>
+	<div class="sliderPanel">
+  	<svg class="sliderRow" id="summaryPanel">
+      <g class="card"> cash sum </g>
+      <g class="card"> equity sum </g>
+      <g class="card"> benefits sum </g>
+      <g class="card"> time sum </g>
+  	</svg>
+    <svg class="sliderRow" id="cashPanel">
+      <g class="card"> signing bonus </g>
+      <g class="card"> salary </g>
+      <g class="card"> performance bonus </g>
+    </svg>
+    <svg class="sliderRow" id="perkPanel">
+      <g class="card"> sigining equity </g>
+      <g class="card"> earned equity </g>
+      <g class="card"> bonus equity </g>
+    </svg>
+    <svg class="sliderRow" id="timePanel">
+      <g class="card"> time committment </g>
+      <g class="card"> workload </g>
+      <g class="card"> utilization </g>
+    </svg>
+	</div>
+
+<body>
+  <script>
+  var cardRow = d3.selectAll("svg")
+    .append("g")
+      .attr("id", "")
+
+
+  </script>
+</body>
