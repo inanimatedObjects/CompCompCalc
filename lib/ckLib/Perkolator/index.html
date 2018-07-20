@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+
+    /* html tags */
+    svg {
+      margin: 5px 5px;
+    }
+    text {
+      font-family: arial;
+    }
+
+    /* id tags */
+    #barContainer {
+      display: flex;
+      justify-content: center;
+    }
+    #cardsContainer {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* class tags */
+    .barSvg {
+      border: 2px solid black;
+    }
+    .card {
+      text-anchor: middle;
+    }
+    .cardBackground {
+      border: 2px solid black;
+    }
+
+
+
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript" src="./global.js"></script>
+  <script type="text/javascript" src="./Card.js"></script>
+
+  <div id="barContainer"></div>
+
+  <div id="cardsContainer"></div>
+
+  <script>
+// stacked bar d3
+  var barSvg = d3.select("#barContainer")
+    .append("svg")
+      .attr("class", "barSvg")
+      .style("width", 1200)
+      .style("height", 200)
+      .append("g")
+      .attr("class", "allBars")
+      .selectAll(".bar")
+        .data(compData)
+        .enter().append("g")
+          .attr("class", "bar")
+          .append("rect")
+            .attr("class", "bar")
+            .attr("x", function(d, i) {
+              console.log("accum scale", normalizedXScale[i])
+              return normalizedXScale[i] + 200
+            })
+            .attr("y", 75)
+            .attr("width", function(d, i) {
+              console.log("data", 4 * compDataArray[i])
+              return normalizedCompData[i]
+            })
+            .attr("height", 50)
+            .attr("fill", function(d, i) {
+              return colorScale(i)
+            })
+            .attr("cursor", "pointer")
+            .on("mouseover", function(d, i) {
+              d3.select(this).transition()
+                .ease("elastic")
+                .duration("500")
+                .attr("x",)
+                .attr("width", normalizedXScale[i] + 210)
+            })
+            .on("mouseout", function(d, i) {
+              d3.select(this).transition()
+                .ease("quad")
+                .delay("100")
+                .duration("200")
+            })
+
+
+// cards d3
+  var cardsSvg = d3.select("#cardsContainer")
+    .append("svg")
+      .attr("class", "cardsSvg")
+      .style("width", 1200)
+      .style("height", 1600)
+      .selectAll("g")
+        .data(compData)
+        .enter().append("g")
+        .each(addCardData)
+
+  </script>
+</body>
