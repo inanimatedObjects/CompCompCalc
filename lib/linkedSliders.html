@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>Linked Input Test</title>
-<h1>Linked Sliders</h1>
-<div id=viz style="margin-top: 50px;"></div>
-<p>
-  <label for="nHeight"
-         style="display: inline-block; width: 240px; text-align: right; padding-top: 10px">
-         $ amount = <span id="nHeight-value">…</span>
-  </label>
-  <input type="range" min="1" max="100" id="nHeight">
-</p>
-<p>
-  <label for="nWidth"
-         style="display: inline-block; width: 240px; text-align: right; padding-bottom: 20px">
-         % of range extent = <span id="nWidth-value">…</span>
-  </label>
-  <input type="range" min="0" max="100" id="nWidth">
-</p>
+<h1>slider</h1>
+
+<div id=linkedBar>linked bar
+  <div id=viz style="margin-top: 50px;"></div>
+  <p>
+    <label for="nHeight"
+           style="display: inline-block; width: 240px; text-align: right; padding-top: 10px">
+           $ amount = <span id="nHeight-value">…</span>
+    </label>
+    <input type="range" min="1" max="100" id="nHeight">
+  </p>
+  <p>
+    <label for="nWidth"
+           style="display: inline-block; width: 240px; text-align: right; padding-bottom: 20px">
+           % of range extent = <span id="nWidth-value">…</span>
+    </label>
+    <input type="range" min="0" max="100" id="nWidth">
+  </p>
+</div>
+
+<div id=linkedAxis>linked axis</div>
+
+
+
 
 <div id="valueSlider" style="margin:30px; color: #17b424; font-size:20px;">linked range
   <p>
@@ -93,8 +101,11 @@ function updateWidth(nWidth) {
     .attr("width", nWidth);
 }
 
+
 var sliderExtent = [0, 100];
-// var numExtent = [0, 100];
+// var height = 60;
+// var width = 500;
+
 var sValue;
 
 var range = d3.select("#sliderValue")
