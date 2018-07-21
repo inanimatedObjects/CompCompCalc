@@ -3,23 +3,68 @@
 <head>
   <meta charset="utf-8">
   <script src="https://d3js.org/d3.v4.min.js"></script>
-  <style>
-    .grid {
-      display: grid;
-    }
-    .column {
-
-    }
-
-
-  </style>
+  <link rel="stylesheet" href="./style.css"></style>
 </head>
 
 <body>
   <div class="grid">
-    <div class="column col1"></div>
-    <div class="column col2"></div>
-    <div class="column col3"></div>
+    <div class="box head">
+      <p class="title">perkolator</p>
+    </div>
+    <div class="box stackedBar">
+      stackedBar
+    </div>
+    <div class="box card cash1">
+      <div id="cardContainer">
+        <div id="cash1" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="slider">$50,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="sliderRange sliderMin" />
+            <input type="range" value="0.5" max="1" step=".01" name="slider" class="slider" />
+            <input type="number" value="100000" name="sliderMax" class="sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card cash2">
+      cash2
+    </div>
+    <div class="box card cash3">
+      cash3
+    </div>
+    <div class="box card equity1">
+      equity1
+    </div>
+    <div class="box card equity2">
+      equity2
+    </div>
+    <div class="box card equity3">
+      equity3
+    </div>
+    <div class="box card perks1">
+      perks1
+    </div>
+    <div class="box card perks2">
+      perks2
+    </div>
+    <div class="box card perks3">
+      perks3
+    </div>
+    <div class="box card time1">
+      time1
+    </div>
+    <div class="box card time2">
+      time2
+    </div>
+    <div class="box card time3">
+      time3
+    </div>
+    <div class="box footer">
+      footer
+    </div>
   </div>
   <script>
 
