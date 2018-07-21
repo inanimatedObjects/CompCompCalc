@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body {
+      margin:10px;
+      position:fixed;
+      top:0;
+      right:0;
+      bottom:0;
+      left:0;
+    }
+
+  </style>
+</head>
+
+<body>
+  <p class="sliderLabel"> comp panel </p>
+  <p class="sliderDescription"> slider </p>
+
+ <div class="code">
+	<pre>
+    var records = [
+      {min: 0, max: 20, value: 19, id: "set", type: "number"},
+      {min: 0, max: 20, value: 19, id: "set", type: "number"},
+      {min: 0, max: 20, value: 19, id: "set", type: "number"},
+      {min: 0, max: 20, value: 19, id: slider, type: "range"},
+
+    ];
+
+    d3.nest()
+            .key(function(d){return d.type;})
+            .key(function(d){return d.tip;})
+            .entries(records) =>
+	</pre>
+</div>
+
+<div>
+    <pre id="nest">nest</pre>
+</div>
+
+<script>
+  d3.selection.prototype.checked = function(value) {
+     return arguments.length < 1
+      ? this.property("checked")
+      : this.property("checked", !!value);
+  };
+
+  d3.selectAll("input input[type=checkbox]").checked(true);
+
+
+
+
+  d3.selectAll("p").on("click", function() {
+  	forEach(style.("color", function() {
+      this.color === "red"
+    	? this.color ="black"
+    	: this.color ="red";
+      return this;
+    }
+  });
+
+        var records = [
+        {min: 0, max: 20, value: 12, type: "range"},
+        {min: 0, max: 20, value: 19, type: "number"},
+        {min: 0, max: 20, value: 19, type: "number"},
+        {min: 0, max: 20, value: 19, type: "number"},
+
+    ];
+
+      var nest = d3.nest()
+            .key(function (d) { // <- A
+                return d.type;
+            })
+            .key(function (d) { // <- B
+                return d.tip;
+            })
+            .entries(records); // <- C
+
+    d3.select("#nest").html(printNest(nest, ""));
+
+    // Utility function to generate HTML representation of nested tip data
+    function printNest(nest, out, i) {
+        if(i === undefined) i = 0;
+
+        var tab = ""; for(var j = 0; j < i; ++j) tab += " ";
+
+        nest.forEach(function (e) {
+            if (e.key)
+                out += tab + e.key + "<br>";
+            else
+                out += tab + printObject(e) + "<br>";
+
+            if (e.values)
+                out = printNest(e.values, out, ++i);
+            else
+                return out;
+        });
+
+        return out;
+    }
+
+    function printObject(obj) {
+        var s = "{";
+        for (var f in obj) {
+            s += f + ": " + obj[f] + ", ";
+        }
+        s += "}";
+        return s;
+
+
+
+d3.selectAll("input input[type=number]").classed('inputDriver', (d) => return d.value < 0)
+
+
+d3.selectAll('div input')
+  .classed(
+    'driver',
+    (d, i, nodes) => {
+      const node = d3.select(nodes[i])
+      node.attr('type') !== 'range';
+    }
+  )
+
+
+    var max = 10;
+    var min = 0;
+    var mid =(max-min)/2 + min;
+    var sValue = parseFloat(Math.round(mid * 10)/10).toFixed(1);
+
+
+  function sliderPanel() {
+    var _panel = {};
+
+    var _width = 300, _height = 400,
+            _colors = d3.scaleOrdinal(d3.schemeCategory20c),
+            _svg,
+            _nodes,
+            _valueAccessor,
+            _treemap,
+            _bodyG;
+
+    _chart.render = function () {
+        if (!_svg) {
+            _svg = d3.select("body").append("svg")
+                    .attr("height", _height)
+                    .attr("width", _width);
+        }
+        renderBody(_svg);
+    };
+
+    function renderBody(svg) {
+        if (!_bodyG) {
+            _bodyG = svg.append("g")
+                    .attr("class", "body");
+
+            _input = _bodyG.append("input")
+           					.attr("min", sValue)
+           					.attr("max", sValue)
+                    .attr("value", sValue);
+
+              d3.treemap()
+                    .size([_width, _height])
+                    .round(true)
+                    .padding(1);
+        }
+
+        var root = d3.selectAll("input.value")
+                .append("g")
+                .sort(function(a, b) { return b.value - a.value; });
+
+        _input(root);
+
+        var cells = _bodyG.selectAll("g")
+                .data(root.leaves(), function(d){console.log(d.data.name);return 		d.data.name;});
+
+        renderCells(cells);
+    }
+
+
+// update
+d3.selectAll("input > .value")
+	.property("type", "number")
+	.property("min", min)
+	.property("max", max)
+  .property("value", min);
+
+d3.selectAll("input > .max")
+	.property("type", "number")
+	.property("min", min)
+	.property("max", max)
+	.property("value", max);
+
+d3.selectAll("input > .slider")
+  .property("type", "range")
+  .property("class","slider")
+  .property("min", min)
+	.property("max", max)
+	.property("value", sValue);
+
+d3.selectAll("input > .target")
+	.property("type", "number")
+	.property("class","driver")
+  .property("min",min)
+	.property("max",max)
+	.property("value",sValue);
+
+
+// Enter
+d3.selectAll("div").on("input", function() {
+  updateValue(+this.inputs.value, colorscale, ".min");
+  updateValue(+this.inputs.value, colorscale,  ".max");
+  updateValue(+this.inputs.value, linearScale, ".slider");
+  updateValue(+this.inputs.value, colorscale, ".target");
+})
+
+function updateValue(data, scale, selector) {
+    var inputs = d3.select(selector).selectAll("div > input.value")
+                .data(data); //update
+
+        inputs.enter()
+            .append("div").merge(inputs)
+                .classed("inputs", true)
+                .style("display", "inline-block")
+                .style("background-color", function(d){
+                    return scale(d.value);
+                })
+                .text(function(d,i){
+          				return i;
+        });
+
+    updateValue(data, colorScale, "input.target]");
+
+
+  d3.select(".min").property("value", min)
+  d3.select(".max").property("value", max)
+  d3.select(".target").property("value", sValue)
+  d3.select(".slider").property("value", sValue);
+}
+
+  updateValue(data, colorScale, "input[type=number]", );
+
+
+
+</script>
+  <input type=checkbox><p>tag</p>
+
+  <div id="card" style="padding: 20px">
+    <input class="target" type=number oninput="updateValue(this.value, colorScale,'.target');">
+    <br>
+    <group>
+      <input type=number class="min" value=min>
+      <input type=range class="slider">
+      <input type=number class="max" value=max>
+    </group>
+  </div>
+  <p>comp card</p>
+  <p>constructor</p>
+
+
+</body>
