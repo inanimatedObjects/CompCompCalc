@@ -20,8 +20,10 @@
 
 <body>
 
+
+
 <form action="#">
-  <fieldset>
+  <fieldset disabled>
     <legend>Comp Type => { <abbr title="base salary considered: all cash payments where amount balance is calculated using any fixed-multiplier on a time-based factor">base salary</abbr> }</legend>
     <label for="rangeSlider">
       <strong><dfn id="slider"><abbr title="This component contains the inputs & drivers involved determining the value of a distinct compensation category.">comp type</abbr> category drivers<br></dfn></strong>
@@ -51,13 +53,21 @@
 
 
 
+<button id="settings" onclick="edit()">edit range settings</button>
+
+<script type="text/javascript">
+var toggle = false;
+var changeSetting = ["disabled", !toggle];
+
+var fieldset = d3.select("#settings").selectAll("fieldset");
+
+function edit(changeSetting) {
+  fieldset.attr(edit)
+  .data(data);
+}
+  d3.enter()
 
 
-
-
-
-  <!-- id=linkedAxis>linked axis -->
-<!-- <div id=linkedBar>linked bar -->
-
+</script>
 
 </body>
