@@ -117,3 +117,10 @@ p {
   background-color: lightgrey;
   height: 50px;
 }
+
+/* Footer tag styles */
+.ioTag {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
