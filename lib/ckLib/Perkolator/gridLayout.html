@@ -61,7 +61,7 @@
           <p>
             min :
             <input type="number" value="0" name="sliderMin" class="cash3 sliderRange sliderMin" />
-            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="cash3 slider" />
+            <input type="range" value="0.8" max="1" step=".01" name="Incentive Comp - Cash" class="cash3 slider" />
             <input type="number" value="100000" name="sliderMax" class="cash3 sliderRange sliderMax" />
             : max
           </p>
@@ -76,7 +76,7 @@
           <p>
             min :
             <input type="number" value="0" name="sliderMin" class="equity1 sliderRange sliderMin" />
-            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="equity1 slider" />
+            <input type="range" value="0.8" max="1" step=".01" name="Base Equity" class="equity1 slider" />
             <input type="number" value="100000" name="sliderMax" class="equity1 sliderRange sliderMax" />
             : max
           </p>
@@ -91,7 +91,7 @@
           <p>
             min :
             <input type="number" value="0" name="sliderMin" class="equity2 sliderRange sliderMin" />
-            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="equity2 slider" />
+            <input type="range" value="0.8" max="1" step=".01" name="eqRate" class="equity2 slider" />
             <input type="number" value="100000" name="sliderMax" class="equity2 sliderRange sliderMax" />
             : max
           </p>
@@ -106,7 +106,7 @@
           <p>
             min :
             <input type="number" value="0" name="sliderMin" class="equity3 sliderRange sliderMin" />
-            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="equity3 slider" />
+            <input type="range" value="0.8" max="1" step=".01" name="Incentive Comp - Equity" class="equity3 slider" />
             <input type="number" value="100000" name="sliderMax" class="equity3 sliderRange sliderMax" />
             : max
           </p>
@@ -121,7 +121,7 @@
           <p>
             min :
             <input type="number" value="0" name="sliderMin" class="perks1 sliderRange sliderMin" />
-            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="perks1 slider" />
+            <input type="range" value="0.8" max="1" step=".01" name="Stipends" class="perks1 slider" />
             <input type="number" value="100000" name="sliderMax" class="perks1 sliderRange sliderMax" />
             : max
           </p>
@@ -136,7 +136,7 @@
           <p>
             min :
             <input type="number" value="0" name="sliderMin" class="perks2 sliderRange sliderMin" />
-            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="perks2 slider" />
+            <input type="range" value="0.8" max="1" step=".01" name="Benefits" class="perks2 slider" />
             <input type="number" value="100000" name="sliderMax" class="perks2 sliderRange sliderMax" />
             : max
           </p>
@@ -151,7 +151,7 @@
           <p>
             min :
             <input type="number" value="0" name="sliderMin" class="perks3 sliderRange sliderMin" />
-            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="perks3 slider" />
+            <input type="range" value="0.8" max="1" step=".01" name="Retirement Savings" class="perks3 slider" />
             <input type="number" value="100000" name="sliderMax" class="perks3 sliderRange sliderMax" />
             : max
           </p>
@@ -166,7 +166,7 @@
           <p>
             min :
             <input type="number" value="0" name="sliderMin" class="time1 sliderRange sliderMin" />
-            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="time1 slider" />
+            <input type="range" value="0.8" max="1" step=".01" name="timeRate" class="time1 slider" />
             <input type="number" value="100000" name="sliderMax" class="time1 sliderRange sliderMax" />
             : max
           </p>
@@ -181,7 +181,7 @@
           <p>
             min :
             <input type="number" value="0" name="sliderMin" class="time2 sliderRange sliderMin" />
-            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="time2 slider" />
+            <input type="range" value="0.8" max="1" step=".01" name="timeAllocation" class="time2 slider" />
             <input type="number" value="100000" name="sliderMax" class="time2 sliderRange sliderMax" />
             : max
           </p>
@@ -196,7 +196,7 @@
           <p>
             min :
             <input type="number" value="0" name="sliderMin" class="time3 sliderRange sliderMin" />
-            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="time3 slider" />
+            <input type="range" value="0.8" max="1" step=".01" name="timeUtilization" class="time3 slider" />
             <input type="number" value="100000" name="sliderMax" class="time3 sliderRange sliderMax" />
             : max
           </p>
@@ -215,7 +215,18 @@
               'equity1')
       .range('green', 'blue')
 
-    renderCard(data);
+    renderCard('cash1');
+    renderCard('cash2');
+    renderCard('cash3');
+    renderCard('equity1');
+    renderCard('equity2');
+    renderCard('equity3');
+    renderCard('perks1');
+    renderCard('perks2');
+    renderCard('perks3');
+    renderCard('time1');
+    renderCard('time2');
+    renderCard('time3');
   </script>
 
 </body>
