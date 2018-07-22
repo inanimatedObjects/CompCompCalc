@@ -4,15 +4,13 @@ html, body {
   padding: 0px;
   margin: 0px;
 }
-#sliderContainer, .box {
-  height: 100px;
-}
 .grid {
   display: grid;
-  grid-template-columns: 50px repeat(3, [col] 1fr) 50px;
+  grid-template-columns: 40px repeat(3, [col] 1fr) 40px;
   grid-template-rows: repeat(7, [row] auto);
   padding: 0px;
   margin: 0px;
+  gap: 10px;
 }
 .box {
   display: flex;
@@ -21,16 +19,24 @@ html, body {
 }
 .card {
   height: 200px;
-  border: 2px solid black;
+  border: 1px solid;
   display: flex;
   justify-content: center;
 }
 
 /* Styles for the slider and bar */
+#sliderContainer {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bar {
+  height: 100px;
+}
 input.sliderRange {
   width: 70px;
 }
-
 output.slider {
   font-size: 18pt;
   margin: 10px;
@@ -55,6 +61,7 @@ p {
   grid-column: col / span 3;
   grid-row: row 2;
   height: 200px;
+  border: 1px solid;
 }
 .cash1 {
   grid-column: col ;

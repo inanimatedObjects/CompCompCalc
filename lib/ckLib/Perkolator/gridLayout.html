@@ -7,6 +7,7 @@
 </head>
 
 <body>
+  <script type="text/javascript" src="./scripts/renderCard.js"></script>
   <div class="grid">
     <div class="box head">
       <p class="title">perkolator</p>
@@ -15,22 +16,35 @@
       stackedBar
     </div>
     <div class="box card cash1">
+      <!-- TODO: look into html templates - use this as a modular piece if it works -->
       <div id="cardContainer">
         <div id="cash1" class="bar"></div>
         <div id="sliderContainer">
-          <output class="slider">$50,000</output>
+          <output class="cash1 slider">$7,000</output>
           <p>
             min :
-            <input type="number" value="0" name="sliderMin" class="sliderRange sliderMin" />
-            <input type="range" value="0.5" max="1" step=".01" name="slider" class="slider" />
-            <input type="number" value="100000" name="sliderMax" class="sliderRange sliderMax" />
+            <input type="number" value="0" name="sliderMin" class="cash1 sliderRange sliderMin" />
+            <input type="range" value="0.7" max="1" step=".01" name="Signing Bonus" class="cash1 slider" />
+            <input type="number" value="10000" name="sliderMax" class="cash1 sliderRange sliderMax" />
             : max
           </p>
         </div>
       </div>
     </div>
     <div class="box card cash2">
-      cash2
+      <div id="cardContainer">
+        <div id="cash2" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="cash2 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="cash2 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="cash2 slider" />
+            <input type="number" value="100000" name="sliderMax" class="cash2 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
     </div>
     <div class="box card cash3">
       cash3
@@ -66,9 +80,25 @@
       footer
     </div>
   </div>
-  <script>
 
+  <script>
+    let cardsArr = [
+      'cash1', 'cash2', 'cash3',
+      'equity1', 'equity2', 'equity3',
+      'perks1', 'perks2', 'perks3',
+      'time1', 'time2', 'time3'
+    ]
+    const colorScale = d3.scaleLinear()
+      .domain(cardsArr)
+      .range(['green', 'blue'])
+
+    renderCard('cash1', 0);
+    renderCard('cash2', 1);
+    // etc...
+    // once it's modular...
+    // renderCard(data)
   </script>
+
 </body>
 
 
