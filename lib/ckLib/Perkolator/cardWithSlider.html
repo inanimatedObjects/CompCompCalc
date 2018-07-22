@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<style>
+  #cardContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+    width: 400px;
+    height: 200px;
+    border: 1px solid black;
+  }
+
+  #sliderContainer, #bar {
+    width: 400px;
+    height: 100px;
+  }
+
+  #sliderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+
+  input.sliderMin, input.sliderMax {
+    width: 70px;
+  }
+
+  output.slider {
+    font-size: 18pt;
+    margin: 10px;
+  }
+
+  p {
+    font-size: 11pt;
+    margin: 0 auto;
+  }
+
+  .backgroundRect {
+    fill: none;
+    stroke: black;
+    stroke-width: 3;
+  }
+
+</style>
+</head>
+
+<body>
+  <div id="cardContainer">
+    <div id="bar"></div>
+    <div id="sliderContainer">
+      <output class="slider">$50,000</output>
+      <p>
+        min :
+        <input type="number" value="0" name="sliderMin" class="sliderRange sliderMin" />
+        <input type="range" value="0.5" max="1" step=".01" name="slider" class="slider" />
+        <input type="number" value="100000" name="sliderMax" class="sliderRange sliderMax" />
+        : max
+      </p>
+    </div>
+  </div>
+
+<script>
+var width = 400;
+var height = 100;
+var backBarWidth = 350;
+var sliderByCname = document.getElementsByClassName("slider");
+var min = document.getElementsByClassName('sliderMin');
+var max = document.getElementsByClassName('sliderMax');
+
+var svg = d3.select("div#bar")
+  .append("svg")
+  .attr("height", height)
+  .attr("width", width);
+
+svg.append("text")
+  .text("Sample Card")
+  .attr("class", "title")
+  .attr("x", 153.31)
+  .attr("y", 90);
+
+svg.append("rect")
+  .attr("class", "backgroundRect")
+  .attr("x", 25)
+  .attr("y", 10)
+  .attr("width", backBarWidth)
+  .attr("height", height / 2);
+
+svg.append("g")
+  .append("rect")
+  .attr("class", "barRect")
+  .attr("x", 26)
+  .attr("y", 11)
+  .attr("width", backBarWidth * 0.5)
+  .attr("height", (height / 2) - 2)
+  .attr("fill", "blue");
+
+
+d3.select("input[type=range].slider").on("input", function() {
+  svg.selectAll(".barRect")
+    .attr("width", this.value * backBarWidth);
+
+  var newValue = this.value * (max[0].value - min[0].value);
+
+  d3.select("output.slider")
+    .text(function(d) {
+      return "$" + d3.format(",")(d)
+    }(newValue));
+});
+
+d3.selectAll("input[type=number].sliderRange").on("change", function() {
+  var currDisplayVal = sliderByCname[0].value
+                       .split(",").join("").split("");
+  currDisplayVal.shift("");
+  currDisplayVal = currDisplayVal.join("");
+
+  var newRatio = this.name === "sliderMin" ? currDisplayVal / (max[0].value - this.value)
+                                           : currDisplayVal / (this.value - min[0].value);
+
+  sliderByCname[1].value = newRatio;
+
+})
+
+
+</script>
+</body>
+</html>
+
+
+<!-- COMMENTS -->
+<!--
+
+-->

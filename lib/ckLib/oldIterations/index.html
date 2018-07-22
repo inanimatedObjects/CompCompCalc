@@ -95,11 +95,12 @@
     .append("svg")
       .attr("class", "cardsSvg")
       .style("width", 1200)
-      .style("height", 1600)
-      .selectAll("g")
-        .data(compData)
-        .enter().append("g")
-        .each(addCardData)
+      .style("height", 1600);
+
+  cardsSvg.selectAll("g")
+    .data(compData)
+    .enter().append("g").attr("class", "cardData")
+    .each(addCardData)
 
   </script>
 </body>

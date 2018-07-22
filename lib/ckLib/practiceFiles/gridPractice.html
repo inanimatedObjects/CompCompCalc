@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-rows: 1fr 3fr repeat(4, 4fr) 1fr;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 10px;
+      background-color: rgba(65, 63, 191, 0.7);
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .row {
+      font-family: 'Output Sans', -apple-system,
+    BlinkMacSystemFont,
+      "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans",
+      "Droid Sans", "Helvetica Neue", sans-serif;
+      color: white;
+      text-transform: uppercase;
+      font-size: 12px;
+      background-color: rgba(83, 235, 243, 0.2);
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      padding: 0;
+      margin: 0;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="grid">
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+  </div>
+  <script>
+
+  </script>
+</body>
+
+
+<!-- NOTE: things from the grid docs to try out -->
+<!--
+    - stretch (property on justify+align selectors)
+        resizes content to fit exactly within grid square
+        also can be done to individual elements - eg. justify-self: stretch
+
+    - row-gap & column-gap
+        provide "gutters" between columns/rows
+
+    ***** this is the basic repeat() logic
+      repeat(number of columns/rows, desired column width)
+
+
+
+-->
