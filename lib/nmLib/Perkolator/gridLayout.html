@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./style.css"></style>
+</head>
+
+<body>
+  <script type="text/javascript" src="./scripts/renderCard.js"></script>
+  <script type="text/javascript" src="./data.js"></script>
+
+  <form id="stackedBarPanel">
+    <fieldset>
+      <legend>Total Aggregate Compensations => { <abbr title="This stacked bar chart is driven by the summary compenensation terms from each of the different panels below. All values have been converted into dollar denominations in order to reduce everything to a single earnings figure.">stacked bars </abbr> }</legend>
+      <label for="stackedBarPanel">Total value of this
+        <strong><dfn id="stackedBar"><abbr title="This component contains the inputs & drivers involved determining the value of a distinct compensation category.">Compensation Package</abbr><br></dfn></strong>
+        <abbr title="All non-dollar denominated values displayed in the stacked bars below (e.g. stock) have bee converted into dollars. See individual panels for formulae and logic.">all values normalized</abbr><br>
+      </label><br><br>
+      <input id="placeHolderSlider" type=range name="placeHolderSlider"><br>
+    </fieldset>
+  </form>
+
+<div>
+<div>
+  <div class="grid">
+    <div class="box head">
+      <p class="title">perkolator</p>
+    </div>
+    <div class="box stackedBar">
+      stackedBar
+      <div id=stackedBar><div>
+    </div>
+
+
+    <div class="box card cash1" style="margin-top:100px;">
+
+      <div id="cardContainer" >
+        <div id="cash1" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="cash1 slider">$7,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="cash1 sliderRange sliderMin" />
+            <input type="range" value="0.7" max="1" step=".01" name="Signing Bonus" class="cash1 slider" />
+            <input type="number" value="10000" name="sliderMax" class="cash1 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card cash2">
+      <div id="cardContainer">
+        <div id="cash2" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="cash2 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="cash2 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="Base Salary" class="cash2 slider" />
+            <input type="number" value="100000" name="sliderMax" class="cash2 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card cash3">
+      <div id="cardContainer">
+        <div id="cash3" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="cash3 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="cash3 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="Incentive Comp - Cash" class="cash3 slider" />
+            <input type="number" value="100000" name="sliderMax" class="cash3 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card equity1">
+      <div id="cardContainer">
+        <div id="equity1" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="equity1 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="equity1 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="Base Equity" class="equity1 slider" />
+            <input type="number" value="100000" name="sliderMax" class="equity1 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card equity2">
+      <div id="cardContainer">
+        <div id="equity2" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="equity2 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="equity2 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="eqRate" class="equity2 slider" />
+            <input type="number" value="100000" name="sliderMax" class="equity2 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card equity3">
+      <div id="cardContainer">
+        <div id="equity3" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="equity3 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="equity3 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="Incentive Comp - Equity" class="equity3 slider" />
+            <input type="number" value="100000" name="sliderMax" class="equity3 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card perks1">
+      <div id="cardContainer">
+        <div id="perks1" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="perks1 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="perks1 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="Stipends" class="perks1 slider" />
+            <input type="number" value="100000" name="sliderMax" class="perks1 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card perks2">
+      <div id="cardContainer">
+        <div id="perks2" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="perks2 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="perks2 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="Benefits" class="perks2 slider" />
+            <input type="number" value="100000" name="sliderMax" class="perks2 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card perks3">
+      <div id="cardContainer">
+        <div id="perks3" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="perks3 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="perks3 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="Retirement Savings" class="perks3 slider" />
+            <input type="number" value="100000" name="sliderMax" class="perks3 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card time1">
+      <div id="cardContainer">
+        <div id="time1" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="time1 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="time1 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="timeRate" class="time1 slider" />
+            <input type="number" value="100000" name="sliderMax" class="time1 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card time2">
+      <div id="cardContainer">
+        <div id="time2" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="time2 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="time2 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="timeAllocation" class="time2 slider" />
+            <input type="number" value="100000" name="sliderMax" class="time2 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box card time3">
+      <div id="cardContainer">
+        <div id="time3" class="bar"></div>
+        <div id="sliderContainer">
+          <output class="time3 slider">$80,000</output>
+          <p>
+            min :
+            <input type="number" value="0" name="sliderMin" class="time3 sliderRange sliderMin" />
+            <input type="range" value="0.8" max="1" step=".01" name="timeUtilization" class="time3 slider" />
+            <input type="number" value="100000" name="sliderMax" class="time3 sliderRange sliderMax" />
+            : max
+          </p>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="box footer">
+
+    </div>
+  </div>
+
+  <script>
+
+    const colorScale = d3.scaleLinear()
+      .domain('cash1', 'cash2', 'cash3',
+              'equity1')
+      .range('green', 'blue')
+
+    renderCard('cash1');
+    renderCard('cash2');
+    renderCard('cash3');
+    renderCard('equity1');
+    renderCard('equity2');
+    renderCard('equity3');
+    renderCard('perks1');
+    renderCard('perks2');
+    renderCard('perks3');
+    renderCard('time1');
+    renderCard('time2');
+    renderCard('time3');
+  </script>
+
+</body>
+
+
+<!-- NOTE: things from the grid docs to try out -->
+<!--
+    - stretch (property on justify+align selectors)
+        resizes content to fit exactly within grid square
+        also can be done to individual elements - eg. justify-self: stretch
+
+    - row-gap & column-gap
+        provide "gutters" between columns/rows
+        *
+
+-->

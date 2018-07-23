@@ -11,19 +11,19 @@
       font-style: italic;
       font-weight: 100;
     }
-    #rangeSlider {
+    #panel {
       min-width: min-content;
+      max-width: 400px;
     }
+
 
   </style>
 </head>
 
 <body>
 
-
-
-<form action="#">
-  <fieldset disabled>
+<form id="panel">
+  <fieldset>
     <legend>Comp Type => { <abbr title="base salary considered: all cash payments where amount balance is calculated using any fixed-multiplier on a time-based factor">base salary</abbr> }</legend>
     <label for="rangeSlider">
       <strong><dfn id="slider"><abbr title="This component contains the inputs & drivers involved determining the value of a distinct compensation category.">comp type</abbr> category drivers<br></dfn></strong>
@@ -53,21 +53,28 @@
 
 
 
-<button id="settings" onclick="edit()">edit range settings</button>
+<button id="rangeSettings" onclick="toggle()">edit range settings</button>
+<!-- <button id="enable" onclick="enableEdit()">enable edit settings</button> -->
 
-<script type="text/javascript">
-var toggle = false;
-var changeSetting = ["disabled", !toggle];
+<script>
+var fieldset = d3.select("#panel").select("fieldset");
 
-var fieldset = d3.select("#settings").selectAll("fieldset");
-
-function edit(changeSetting) {
-  fieldset.attr(edit)
-  .data(data);
+function toggle() {
+   if (!fieldset.property("disabled")) {
+     return fieldset.property("disabled", function(){return true;})
+     .style("background-color", "#e9967a");
+   } else {
+     return fieldset.property("disabled", function(){return false;})
+     .style("background-color", "#add8e6");
+   }
 }
-  d3.enter()
 
-
+// NOTE: to set disable & enable to separate buttons
+  // function disableEdit() {
+  //   return fieldset.property("disabled", function(){return true;});
+  // }
+  // function enableEdit() {
+  //   return fieldset.property("disabled", function(){return false;});
+  // }
 </script>
-
 </body>
