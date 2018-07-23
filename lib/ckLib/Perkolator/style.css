@@ -163,13 +163,6 @@ input[type=range]:focus::-ms-fill-upper {
   background: #1c1c1c;
 }
 
-
-.stackBarRect {
-  fill: orange;
-  stroke: purple;
-  stroke-width: 2;
-}
-
 /* Individual styles for box placement */
 .head {
   grid-column: col / span 3;
