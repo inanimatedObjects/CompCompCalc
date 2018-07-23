@@ -39,6 +39,7 @@ html, body {
 .bar {
   height: 100px;
 }
+
 input.sliderMin {
   text-align: right;
 }
@@ -68,7 +69,7 @@ p {
 }
 .backgroundRect {
   fill: none;
-  stroke: black;
+  stroke: blue;
   stroke-width: 3;
 }
 .unlockBtn {
@@ -162,6 +163,12 @@ input[type=range]:focus::-ms-fill-upper {
   background: #1c1c1c;
 }
 
+
+.stackBarRect {
+  fill: orange;
+  stroke: purple;
+  stroke-width: 2;
+}
 
 /* Individual styles for box placement */
 .head {

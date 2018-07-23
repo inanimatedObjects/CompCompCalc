@@ -11,16 +11,18 @@
       font-style: italic;
       font-weight: 100;
     }
-    #rangeSlider {
+    #panel {
       min-width: min-content;
+      max-width: 400px;
     }
+
 
   </style>
 </head>
 
 <body>
 
-<form action="#">
+<form id="panel">
   <fieldset>
     <legend>Comp Type => { <abbr title="base salary considered: all cash payments where amount balance is calculated using any fixed-multiplier on a time-based factor">base salary</abbr> }</legend>
     <label for="rangeSlider">
@@ -51,13 +53,28 @@
 
 
 
+<button id="rangeSettings" onclick="toggle()">edit range settings</button>
+<!-- <button id="enable" onclick="enableEdit()">enable edit settings</button> -->
 
+<script>
+var fieldset = d3.select("#panel").select("fieldset");
 
+function toggle() {
+   if (!fieldset.property("disabled")) {
+     return fieldset.property("disabled", function(){return true;})
+     .style("background-color", "#e9967a");
+   } else {
+     return fieldset.property("disabled", function(){return false;})
+     .style("background-color", "#add8e6");
+   }
+}
 
-
-
-  <!-- id=linkedAxis>linked axis -->
-<!-- <div id=linkedBar>linked bar -->
-
-
+// NOTE: to set disable & enable to separate buttons
+  // function disableEdit() {
+  //   return fieldset.property("disabled", function(){return true;});
+  // }
+  // function enableEdit() {
+  //   return fieldset.property("disabled", function(){return false;});
+  // }
+</script>
 </body>
