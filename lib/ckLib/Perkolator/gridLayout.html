@@ -20,17 +20,10 @@
     <div class="box head">
       <h2 class="title">perkolator</h2>
     </div>
-
     <div class="box stackedBar" id="stackedBar">
-
 
     </div>
 
-    <form id="stackedBarPanel">
-      <fieldset>
-        <legend>Total Aggregate Compensations => { <abbr title="This stacked bar chart is driven by the summary compenensation terms from each of the different panels below. All values have been converted into dollar denominations in order to reduce everything to a single earnings figure.">base salary</abbr> }</legend>
-        <label for="stackedBarPanel">
-    
     <!-- TODO: look into html templates - use this as a modular piece if it works -->
     <div class="box card cash1">
 
@@ -241,7 +234,7 @@
     ]
 
     // define color scale
-    var colorScale = d3.scaleOrdinal(d3.schemePaired);
+    var colorScale = d3.scaleOrdinal(d3.schemePaired)
     console.log(colorScale)
 
     // change button text, disable/enable input lock
