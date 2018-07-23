@@ -34,6 +34,9 @@ html, body {
 .bar {
   height: 100px;
 }
+.stackBar {
+  height: 100px;
+}
 input.sliderRange {
   width: 70px;
 }
@@ -47,8 +50,14 @@ p {
 }
 .backgroundRect {
   fill: none;
-  stroke: black;
+  stroke: blue;
   stroke-width: 3;
+}
+
+.stackBarRect {
+  fill: orange;
+  stroke: purple;
+  stroke-width: 2;
 }
 
 /* Individual styles for box placement */

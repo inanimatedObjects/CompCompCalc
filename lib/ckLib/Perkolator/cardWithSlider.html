@@ -103,7 +103,17 @@ svg.append("g")
   .attr("y", 11)
   .attr("width", backBarWidth * 0.5)
   .attr("height", (height / 2) - 2)
-  .attr("fill", "blue");
+  .attr("fill", "blue")
+  .append("rect")
+    .attr("class", "stackBarRect")
+    .attr("x", 26)
+    .attr("y", 11)
+    .attr("width", backBarWidth * 0.5)
+    .attr("height", (height / 2) - 2)
+    .attr("fill", "blue")
+    .each(function (d, i) {
+      d3.select(this).append("h1").text(i);
+    })
 
 
 d3.select("input[type=range].slider").on("input", function() {
