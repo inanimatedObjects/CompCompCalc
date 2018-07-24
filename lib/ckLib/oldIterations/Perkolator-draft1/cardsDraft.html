@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
+  </style>
+</head>
+
+<body>
+  <script>
+// data
+    var data = [
+      { name: "cash1", cardTitle: "Signing Bonus", value: 14000, min: 0, max: 20000 },
+      { name: "cash2", cardTitle: "Base Salary", value: 80000, min: 0, max: 100000 },
+      { name: "cash3", cardTitle: "Incentive Comp - Cash", value: 15000, min: 0, max: 22000 },
+      { name: "equity1", cardTitle: "Signing Equity", value: 60000, min: 0, max: 80000 },
+      { name: "equity2", cardTitle: "eqRate", value: 10000, min: 0, max: 10000 },
+      { name: "equity3", cardTitle: "Incentive Comp - Equity", value: 38000, min: 0, max: 100000 },
+      { name: "perks1", cardTitle: "Stipends", value: 10000, min: 0, max: 100 },
+      { name: "perks2", cardTitle: "Benefits", value: 26000, min: 0, max: 100000 },
+      { name: "perks3", cardTitle: "Retirement Savings", value: 9000, min: 0, max: 30000 },
+      { name: "time1", cardTitle: "timeRate", value: 40000, min: 0, max: 100 },
+      { name: "time2", cardTitle: "timeAllocation", value: 30000, min: 0, max: 50000 },
+      { name: "time3", cardTitle: "timeUtilization", value: 15000, min: 0, max: 32000 }
+    ];
+
+
+
+// d3
+  var svg = d3.select("body").append("svg")
+    .attr("width", 1520)
+    .attr("height", 2100)
+    .attr("margin", "0px 50px 0px 50px")
+
+  svg.selectAll(".stackedBar")
+    .append("g")
+    .append("rect")
+      .attr("class", "stackedBar")
+      .attr("width", 1220)
+      .attr("height", 400)
+      .attr("fill", "none")
+      .attr("stroke", "black")
+      .attr("stroke-width", "1px")
+
+  svg.selectAll(".card")
+    .data(data)
+    .enter()
+  	.append("g")
+    .append("rect")
+      .attr("class", "card")
+      .attr("width", 400)
+      .attr("height", 400)
+      .attr("fill", "none")
+      .attr("stroke", "black")
+      .attr("stroke-width", "1px")
+      .text((d) => { d.name })
+
+  </script>
+</body>
