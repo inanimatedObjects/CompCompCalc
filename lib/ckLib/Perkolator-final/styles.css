@@ -7,7 +7,7 @@ html, body {
 .grid {
   display: grid;
   grid-template-columns: 40px repeat(3, [col] 1fr) 40px;
-  grid-template-rows: repeat(7, [row] auto);
+  grid-template-rows: repeat(8, [row] auto);
   padding: 0px;
   margin: 0px;
   gap: 10px;
@@ -68,9 +68,9 @@ p {
   width: 100%
 }
 .backgroundRect {
-  fill: none;
-  stroke: blue;
-  stroke-width: 3;
+  fill: lightgrey;
+  /* stroke: blue;
+  stroke-width: 3; */
 }
 .unlockBtn {
   margin-top: 10px;
@@ -169,63 +169,69 @@ input[type=range]:focus::-ms-fill-upper {
   grid-row: row 1;
   height: 50px;
 }
-.stackedBar {
+.summaryPanel {
   grid-column: col / span 3;
   grid-row: row 2;
   height: 200px;
   border: 1px solid;
 }
+.stackedBar {
+  grid-column: col / span 3;
+  grid-row: row 3;
+  height: 200px;
+  border: 1px solid;
+}
 .cash1 {
   grid-column: col ;
-  grid-row: row 3;
+  grid-row: row 4;
 }
 .cash2 {
   grid-column: col 2;
-  grid-row: row 3;
+  grid-row: row 4;
 }
 .cash3 {
   grid-column: col 3;
-  grid-row: row 3;
+  grid-row: row 4;
 }
 .equity1 {
   grid-column: col ;
-  grid-row: row 4;
+  grid-row: row 5;
 }
 .equity2 {
   grid-column: col 2;
-  grid-row: row 4;
+  grid-row: row 5;
 }
 .equity3 {
   grid-column: col 3;
-  grid-row: row 4;
+  grid-row: row 5;
 }
 .perks1 {
   grid-column: col ;
-  grid-row: row 5;
+  grid-row: row 6;
 }
 .perks2 {
   grid-column: col 2;
-  grid-row: row 5;
+  grid-row: row 6;
 }
 .perks3 {
   grid-column: col 3;
-  grid-row: row 5;
+  grid-row: row 6;
 }
 .time1 {
   grid-column: col ;
-  grid-row: row 6;
+  grid-row: row 7;
 }
 .time2 {
   grid-column: col 2;
-  grid-row: row 6;
+  grid-row: row 7;
 }
 .time3 {
   grid-column: col 3;
-  grid-row: row 6;
+  grid-row: row 7;
 }
 .footer {
   grid-column: col / span 3;
-  grid-row: row 7;
+  grid-row: row 8;
   background-color: lightgrey;
   height: 50px;
 }
