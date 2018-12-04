@@ -1,0 +1,32 @@
+{
+  "name": "d3ReactExample",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "^2.1.1"
+  },
+  "dependencies": {
+    "browser": "^0.2.6",
+    "d3-array": "^1.2.0",
+    "d3-axis": "^1.0.6",
+    "d3-scale": "^1.0.5",
+    "d3-selection": "^1.0.5",
+    "d3-shape": "^1.0.6",
+    "prop-types": "^15.6.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "recharts": "^1.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
